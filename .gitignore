@@ -1,0 +1,6 @@
+*.pyc
+*.pyo
+*.sqlite3
+__pycache__
+*.wpu
+*.wpr
