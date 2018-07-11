@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from timer import views
 
 app_name = 'timer'
 urlpatterns = [
     #the include function allows referencing other URLconfs.
-    #django chops off whatever part of teh URL up to that point and sends the 
+    #django chops off whatever part of teh URL up to that point and sends the
     #remaining string to the included URLconf for further processing.
+    #path('', views.index, name='index'),
+    #path('activities/', views.activities, name='activities'),
     path('timer/', include('timer.urls')),
     path('admin/', admin.site.urls),
 ]
