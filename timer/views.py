@@ -1,3 +1,4 @@
+from random import randint
 from django.views.decorators.csrf import csrf_exempt
 from django.http import Http404
 from timer.models import Activity
@@ -26,8 +27,22 @@ def activity_detail(request, activity_id):
 
 @csrf_exempt
 def formtest(request):
+
     for key in sorted(request.GET):
         print(f"request.GET[{key}] = {request.GET[key]}")
     for key in sorted(request.POST):
         print(f"request.POST[{key}] = {request.POST[key]}")
-    return render(request, 'timer/formtest.html')
+    for key in sorted(request.COOKIES):
+        print(f"request.COOKIES[{key}] = {request.COOKIES[key]}")
+
+    if request.method == 'POST':
+        if 'formtoken' not in request.POST or request.POST['formtoken'] != request.COOKIES['formtoken']:
+            return HttpResponse(b'FAIL!!!\n')
+
+    # create a "formtoken" and put in the form as a hidden input and as a cookie value
+    form_token = randint(100000, 999999)
+    context = {'formtoken': form_token}
+
+    response = render(request, 'timer/formtest.html', context)
+    response.set_cookie('formtoken', form_token)
+    return response
