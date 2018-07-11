@@ -25,6 +25,8 @@ def activity_detail(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     return render(request, 'timer/activity_detail.html', {'activity': activity})
 
+FORM_TOKEN_SALT = 12345
+
 @csrf_exempt
 def formtest(request):
 
@@ -36,14 +38,15 @@ def formtest(request):
         print(f"request.COOKIES[{key}] = {request.COOKIES[key]}")
 
     if request.method == 'POST':
-        if 'formtoken' not in request.POST or request.POST['formtoken'] != request.COOKIES['formtoken']:
+        if ('formtoken' not in request.POST
+            or int(request.POST['formtoken']) - FORM_TOKEN_SALT != int(request.COOKIES['formtoken']) + FORM_TOKEN_SALT):
             return HttpResponse(b'FAIL!!!\n')
         print("Passes formtoken test!!!")
 
     # create a "formtoken" and put in the form as a hidden input and as a cookie value
     form_token = randint(100000, 999999)
-    context = {'formtoken': form_token}
+    context = {'formtoken': form_token + FORM_TOKEN_SALT}
 
     response = render(request, 'timer/formtest.html', context)
-    response.set_cookie('formtoken', form_token)
+    response.set_cookie('formtoken', form_token - FORM_TOKEN_SALT)
     return response
