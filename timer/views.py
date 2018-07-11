@@ -24,7 +24,7 @@ def activity_detail(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     return render(request, 'timer/activity_detail.html', {'activity': activity})
 
-
+@csrf_exempt
 def formtest(request):
     for key in sorted(request.GET):
         print(f"request.GET[{key}] = {request.GET[key]}")

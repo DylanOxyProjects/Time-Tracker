@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <form>
+    <form method='post'>
       <input type="hidden" name="username" value="rod">
       <input type="hidden" name="password" value="asdfzxcv">
 
@@ -27,5 +27,9 @@
       <input type="submit" value="Submit">
 
     </form>
+    <br>
+
+    First Submit, then from command line run<br>
+    <pre>curl -X POST -F 'username=davidwalsh' -F 'password=something' -F 'firstname=foo' -F 'lastname=bar' -F 'gender=female' http://localhost:8000/timer/formtest/</pre>
   </body>
 </html>
