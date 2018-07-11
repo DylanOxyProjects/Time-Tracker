@@ -18,25 +18,49 @@ def activities(request):
     #template rendered with the given context
     return render(request, 'timer/activities.html', context)
 
-def activityDetail(request, activity_id):
+def activity_detail(request, activity_id):
     
     #the get_object_or_404 takes a django model as its first argument and an arbitrary number of keyword arguments, 
     #which it passe sto the get() function of the model's manager. It raises Http404 if the object doesnt exist
     #activity = get_object_or_404(Activity, pk=activity_id)
     activity = Activity.objects.get(id=activity_id)
     
+    
+    
     return render(request, 'timer/activity_detail.html', {'activity': activity})
     
 def new_activity(request):
     """Add a new activity"""
-    if request.method != 'POST':  #1
+    if request.method != 'POST': 
         #No data submitted, create a blank form
-        form = ActivityForm()  #2  
+        form = ActivityForm()   
     else:
         #POST data submitted; process data
-        form = ActivityForm(request.POST)  #3
-        if form.is_valid():   #4
-            form.save()    #5 
-            return HttpResponseRedirect(reverse('timer:activity_detail'))   #6
-    context = {'form': form}   #7
+        form = ActivityForm(request.POST)  
+        if form.is_valid():   
+            form.save()    
+            
+            #activity_title = form.cleaned_data['activity_title']
+            #activity = Activity.objects.filter(activity_title=activity_title)
+            
+            return HttpResponseRedirect(reverse('timer:activities'))   
+    context = {'form': form}   
     return render(request, 'timer/new_activity.html', context)
+
+
+def edit_activity(request, activity_id):
+    """Edit an existing activity"""
+    activity = Activity.objects.get(id=activity_id)
+    
+    if request.method != 'POST':
+        #initial request; pre-fill form with current entry
+        form = ActivityForm(instance=activity)
+    else:
+        # POST data submitted; process data
+        form = ActivityForm(instance=activity, data=request.POST)
+        if form.is_valid:
+            form.save()
+            return HttpResponseRedirect(reverse('timer:activity_detail', args=[activity.id]))
+        
+    context = {'activity': activity, 'form': form}
+    return render(request, 'timer/edit_activity.html', context)

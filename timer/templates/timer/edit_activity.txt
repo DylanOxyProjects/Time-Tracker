@@ -1,0 +1,13 @@
+{% extends "timer/base.html" %}
+
+{% block content%}
+
+	<p><a href="{% url "timer:activity_detail" activity.id%}"> {{ activity }} </a></p>
+	
+	<p> Edit Activity: </p>
+	
+	<form action="{% url "timer:edit_activity" activity.id %}"
+
+
+
+{% endblock content %}

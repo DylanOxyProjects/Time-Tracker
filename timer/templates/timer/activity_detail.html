@@ -3,6 +3,9 @@
 {% block content %}
 	
 	<p>Activity Name = {{activity}}</p>  
+	
 	<p>Activity Time = {{activity.activity_time}}</p>  
+	
+	<a href="{% url 'timer:edit_activity' activity.id%}"> edit activity</a>
 
 {% endblock content %}
