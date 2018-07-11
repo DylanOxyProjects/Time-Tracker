@@ -1,0 +1,12 @@
+{% extends "timer/base.html" %}
+
+{% block content %}
+
+	<p>Add a new topic:</p>
+		<form action="{% url 'timer:new_activity' %}" method='POST'>
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button name="submit"> add activity </button>
+	</form>
+
+{% endblock content %}

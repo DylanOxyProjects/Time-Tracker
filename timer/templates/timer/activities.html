@@ -1,10 +1,30 @@
-{% if activities %}
-    <ul>
-    {% for activity in activities %}
-    
-        <li><a href="{% url 'activity_detail' activity.id %}">{{ activity.activity_title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>You have no activities.</p>
-{% endif %}
+{% extends "timer/base.html" %}
+
+{% block content %}
+
+	<h1> Your Activities </h1>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	
+
+	{% for activity in activities %}
+		<input type="radio" name="activity" id="activity{{ forloop.counter }}" 
+			value="{{ activity.id }}" />
+			
+		<label for="activity{{ forloop.counter }}">
+			{{ activity.activity_title }} 
+			</label><br />
+			
+	<form action="{% url 'timer:activityDetail' activity.id %}" method="post">
+	{% csrf_token %}
+	</form>
+
+	{% empty %}
+	
+		<p>You dont have any activities yet!</p>
+	{% endfor %}	
+	
+	
+	<a href="{% url 'timer:new_activity' %}"> Add a new activity</a>
+
+{% endblock content %}

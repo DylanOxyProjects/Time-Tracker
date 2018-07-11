@@ -1,1 +1,8 @@
-{{ activity }} 
+{% extends "timer/base.html" %}
+
+{% block content %}
+	
+	<p>Activity Name = {{activity}}</p>  
+	<p>Activity Time = {{activity.activity_time}}</p>  
+
+{% endblock content %}
