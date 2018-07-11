@@ -30,7 +30,7 @@
     </form>
     <br>
 
-    First Submit, then from command line run<br>
-    <pre>curl -X POST -F 'username=davidwalsh' -F 'password=something' -F 'firstname=foo' -F 'lastname=bar' -F 'gender=female' http://localhost:8000/timer/formtest/</pre>
+    We have a form cookie, but now try<br>
+    <pre>curl -X POST --cookie 'formtoken=123' -F 'formtoken=123' -F 'username=davidwalsh' -F 'password=something' -F 'firstname=foo' -F 'lastname=bar' -F 'gender=female' http://localhost:8000/timer/formtest/</pre>
   </body>
 </html>
