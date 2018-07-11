@@ -38,6 +38,7 @@ def formtest(request):
     if request.method == 'POST':
         if 'formtoken' not in request.POST or request.POST['formtoken'] != request.COOKIES['formtoken']:
             return HttpResponse(b'FAIL!!!\n')
+        print("Passes formtoken test!!!")
 
     # create a "formtoken" and put in the form as a hidden input and as a cookie value
     form_token = randint(100000, 999999)
