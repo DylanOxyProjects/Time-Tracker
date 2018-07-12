@@ -23,5 +23,6 @@ urlpatterns = [
     #django chops off whatever part of teh URL up to that point and sends the 
     #remaining string to the included URLconf for further processing.
     path('timer/', include('timer.urls')),
-    path('admin/', admin.site.urls),
+    path('users/', include('users.urls', namespace='users')),
+    path('admin/', admin.site.urls),   
 ]

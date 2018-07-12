@@ -11,7 +11,7 @@ def index(request):
    
 def activities(request):
     
-    activities = Activity.objects.order_by('activity_time')[:]
+    activities = Activity.objects.order_by('-activity_time')[:]
     context = {'activities':activities}
     #the render() function takes the rquest object as its first argument, a template name as its second
     #argument and a dictionary as its optional third argument. It returns an HttpResponse object of the given
@@ -64,3 +64,10 @@ def edit_activity(request, activity_id):
         
     context = {'activity': activity, 'form': form}
     return render(request, 'timer/edit_activity.html', context)
+
+
+def delete_activity(request, activity_id):
+    """delete an existing activity"""
+    activity = Activity.objects.get(id=activity_id)
+    activity.delete()
+    return HttpResponseRedirect(reverse('timer:activities')) 

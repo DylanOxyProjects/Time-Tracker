@@ -43,7 +43,8 @@ urlpatterns = [
     path('activities/<int:activity_id>/', views.activity_detail, name='activity_detail'),
     #path(r'^activity_detail/(?P<activity_id>\d+)/$', views.activity_detail, name='activity_detail'),
     path('activities/new_activity/', views.new_activity, name='new_activity'),
-    path('activities/edit_activity/<int:activity_id>/', views.edit_activity, name='edit_activity') 
+    path('activities/edit_activity/<int:activity_id>/', views.edit_activity, name='edit_activity'),
+    path('activities/delete_activity/<int:activity_id>/', views.delete_activity, name='delete_activity')
     
 
 ]

@@ -6,6 +6,13 @@
 	
 	<p>Activity Time = {{activity.activity_time}}</p>  
 	
-	<a href="{% url 'timer:edit_activity' activity.id%}"> edit activity</a>
+	
+	<form action="{% url 'timer:edit_activity' activity.id%}" method="get">
+		<input type="submit" class="btn" value="edit" name="edit_button">
+	</form>
+	
+	<form action="{% url 'timer:delete_activity' activity.id%}" method="get">
+		<input type="submit" class="btn" value="delete" name="delete_button">
+	</form>
 
 {% endblock content %}

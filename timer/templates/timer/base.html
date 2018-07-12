@@ -1,6 +1,15 @@
 <p>
 	<a href="{% url 'timer:index' %}"><b>Time Tracker</b></a> - 
-	<a href="{% url 'timer:activities' %}"><b>Activities</b></a>
+	<a href="{% url 'timer:activities' %}"><b>Activities</b></a> - 
+	{% if user.is_authenticated %}
+		Hello, {{ user.username }}.
+		<a href="{% url 'users:logout' %}">log out</a>
+	
+	{% else %}
+		<a href="{% url 'users:login' %}"> log in </a> - 
+		<a href="{% url 'users:register' %}"> register </a>
+	{% endif %}
+	
 </P>
 
 {% block content %}{% endblock content %}
