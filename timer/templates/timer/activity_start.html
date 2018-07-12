@@ -1,0 +1,12 @@
+{% extends "timer/base.html" %}
+
+{% block content %}
+
+	<p>Activity Name: <b>{{activity}}</b></p> 
+	
+	<form action="{% url 'timer:activity_stop' start.id %}" method="get">
+	{% csrf_token %}
+		<p>Activity Time: <b>{{activity.activity_time}}</b></p>  <input type="submit" class="btn" value="edit" name="stop">
+	</form>
+
+{% endblock content %}

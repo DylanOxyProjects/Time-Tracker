@@ -1,10 +1,17 @@
 {% extends "timer/base.html" %}
 
 {% block content %}
+
+	<p>Activity Name: <b>{{activity}}</b></p> 
+	<p>Activity Time: <b>{{activity.activity_time}}</b></p>
 	
-	<p>Activity Name = {{activity}}</p>  
+	<form action="{% url 'timer:activity_start' activity.id%}" method="get">
+		  <input type="submit" class="btn" value="start" name="start">
+	</form>
 	
-	<p>Activity Time = {{activity.activity_time}}</p>  
+	 
+	
+	
 	
 	
 	<form action="{% url 'timer:edit_activity' activity.id%}" method="get">

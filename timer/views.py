@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, reverse
 from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from timer.stopwatch import Timer
 
 from timer.models import Activity
 from timer.forms import ActivityForm, ActivityFormEdit
@@ -21,13 +22,33 @@ def activities(request):
 
 @login_required 
 def activity_detail(request, activity_id):
-    
+
     activity = Activity.objects.get(id=activity_id)
     #make sure the topic belonds to the curent user
     if activity.owner != request.user:
         raise Http404
     return render(request, 'timer/activity_detail.html', {'activity': activity})
+
+def activity_start(request, activity_id):
+    activity = Activity.objects.get(id=activity_id)
+    timer = Timer()
+    start = timer.now()
     
+    return render(request, 'timer/activity_start.html', {'start': start})
+
+
+def activity_stop(request, start, activity_id):
+    
+    stop = Timer()
+    total_time = start - stop
+    
+    activity = Activity.objects.get(id=activity_id)
+    activity.activity_time = activity.activity_time + total_time
+    
+    return render(request, 'timer/activity_detail.html', {'activity': activity})
+    
+
+
 @login_required 
 def new_activity(request):
     """Add a new activity"""
