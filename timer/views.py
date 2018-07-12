@@ -32,9 +32,9 @@ def activity_detail(request, activity_id):
 def activity_start(request, activity_id):
     activity = Activity.objects.get(id=activity_id)
     timer = Timer()
-    start = timer.now()
+    start = timer.start()
     
-    return render(request, 'timer/activity_start.html', {'start': start})
+    return render(request, 'timer/activity_start.html', {'start': start, 'activity': activity})
 
 
 def activity_stop(request, start, activity_id):

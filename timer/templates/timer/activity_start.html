@@ -4,9 +4,13 @@
 
 	<p>Activity Name: <b>{{activity}}</b></p> 
 	
-	<form action="{% url 'timer:activity_stop' start.id %}" method="get">
-	{% csrf_token %}
-		<p>Activity Time: <b>{{activity.activity_time}}</b></p>  <input type="submit" class="btn" value="edit" name="stop">
+	<p>Activity Time: <b>{{activity.activity_time}}</b></p> 
+	
+	
+	start time: {{ start }} 
+	
+	<form action="{% url 'timer:activity_stop' activity.id}" method="get">
+		  <input type="submit" class="btn" value="stop" name="stop">
 	</form>
 
 {% endblock content %}
