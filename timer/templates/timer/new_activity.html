@@ -1,12 +1,25 @@
 {% extends "timer/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+	
+<h2>Add a new activity</h2>
+
+{% endblock header %}
 
 {% block content %}
 
-	<p>Add a new topic:</p>
-		<form action="{% url 'timer:new_activity' %}" method='POST'>
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button name="submit"> add activity </button>
-	</form>
+   
+    <form action="{% url 'timer:new_activity' %}" method='POST' class="form">
+    
+	{% csrf_token %}
+	{% bootstrap_form form %}
+	
+	{% buttons %}
+	    <button name="submit" class="btn btn-primary">add activity</button>
+	{% endbuttons %}
+	
+	
+    </form>
 
 {% endblock content %}

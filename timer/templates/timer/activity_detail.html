@@ -1,25 +1,26 @@
 {% extends "timer/base.html" %}
 
+{% block header %}
+
+
+
+{% endblock header %}
+    <h2>{{ activity }}</h2>
 {% block content %}
 
-	<p>Activity Name: <b>{{activity}}</b></p> 
-	<p>Activity Time: <b>{{activity.activity_time}}</b></p>
+    <h3><p>Activity Name: <b>{{activity}}</b></p> </h3>
+    <h3><p>Activity Time: <b>{{activity.activity_time}}</b></p></h3>
 	
-	<form action="{% url 'timer:activity_start' activity.id%}" method="get">
-		  <input type="submit" class="btn" value="start" name="start">
-	</form>
+    <form action="{% url 'timer:activity_start' activity.id%}" method="get">
+        <input type="submit" class="btn" value="start" name="start">
+    </form>
 	
-	 
+    <form action="{% url 'timer:edit_activity' activity.id%}" method="get">
+        <input type="submit" class="btn" value="edit" name="edit_button">
+    </form>
 	
-	
-	
-	
-	<form action="{% url 'timer:edit_activity' activity.id%}" method="get">
-		<input type="submit" class="btn" value="edit" name="edit_button">
-	</form>
-	
-	<form action="{% url 'timer:delete_activity' activity.id%}" method="get">
-		<input type="submit" class="btn" value="delete" name="delete_button">
-	</form>
+    <form action="{% url 'timer:delete_activity' activity.id%}" method="get">
+        <input type="submit" class="btn" value="delete" name="delete_button">
+    </form>
 
 {% endblock content %}

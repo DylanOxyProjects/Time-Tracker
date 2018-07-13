@@ -1,28 +1,31 @@
 {% extends "timer/base.html" %}
 
+{% block header %}
+
+    <h1>Activities</h1>
+
+{% endblock header%}
+
 {% block content %}
 
-	<h1> Your Activities </h1>
-
-	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 	
-
-	{% for activity in activities %}
+    {% for activity in activities %}
 	
-		<a href="{% url 'timer:activity_detail' activity.id %}"> {{ activity.activity_title }} - {{ activity.activity_time }}</a> 
+	<h3>
+	    <a href="{% url 'timer:activity_detail' activity.id %}"> {{ activity.activity_title }} - {{ activity.activity_time }}</a> 
+	</h3>
 		
-			
 	<form action="{% url 'timer:activity_detail' activity.id %}" method="post">
-	{% csrf_token %}
+	    {% csrf_token %}
 	</form>
 
-	{% empty %}
+    {% empty %}
+	<p>You dont have any activities yet!</p>
+    {% endfor %}	
 	
-		<p>You dont have any activities yet!</p>
-	{% endfor %}	
 	
-	
-	<a href="{% url 'timer:new_activity' %}"> Add a new activity</a>
+    <h3><a href="{% url 'timer:new_activity' %}"> Add a new activity</a></h3>
 
 {% endblock content %}
 
