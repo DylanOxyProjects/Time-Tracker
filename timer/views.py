@@ -29,25 +29,6 @@ def activity_detail(request, activity_id):
         raise Http404
     return render(request, 'timer/activity_detail.html', {'activity': activity})
 
-def activity_start(request, activity_id):
-    activity = Activity.objects.get(id=activity_id)
-    timer = Timer()
-    start = timer.start()
-    
-    return render(request, 'timer/activity_start.html', {'start': start, 'activity': activity})
-
-
-def activity_stop(request, start, activity_id):
-    
-    stop = Timer()
-    total_time = start - stop
-    
-    activity = Activity.objects.get(id=activity_id)
-    activity.activity_time = activity.activity_time + total_time
-    
-    return render(request, 'timer/activity_detail.html', {'activity': activity})
-    
-
 
 @login_required 
 def new_activity(request):

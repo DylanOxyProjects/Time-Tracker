@@ -25,7 +25,7 @@ SECRET_KEY = '*!h43#%cbo9o=b^6bg6u)7p9%q-edvh*k_0dzyjoios)j$!ivu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['snowviper123123.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'snowviper123123.pythonanywhere.com']
 
 
 # Application definition
@@ -137,3 +137,8 @@ LOGIN_URL = '/users/login/'
 BOOTSTRAP3 = {
     'include_jquery': True
 }
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+
+]
