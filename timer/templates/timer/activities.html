@@ -1,41 +1,28 @@
 {% extends "timer/base.html" %}
-
+{% load static %}
 {% block header %}
 
-    <h1>Activities</h1>
+    
 
 {% endblock header%}
 
 {% block content %}
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<link rel="stylesheet" href="{% static 'activity_detail_style.css' %}" type="text/css" />
+
+
+	<div id="activitiesList">
+    	{% for activity in activities %}
+		<h4><a href="{% url 'timer:activity_detail' activity.activity_title %}">{{ activity.activity_title }}</a> </h4>
+		<h5>{{ activity.activity_time }}</h5>
+
+	</div>
 	
-    {% for activity in activities %}
-	
-	<h3>
-	    <a href="{% url 'timer:activity_detail' activity.id %}"> {{ activity.activity_title }} - {{ activity.activity_time }}</a> 
-	</h3>
-		
-	<form action="{% url 'timer:activity_detail' activity.id %}" method="post">
-	    {% csrf_token %}
-	</form>
+	<form action="{% url 'timer:activities'%}" method="post">{% csrf_token %}</form>
 
     {% empty %}
 	<p>You dont have any activities yet!</p>
     {% endfor %}	
-	
-	
-    <h3><a href="{% url 'timer:new_activity' %}"> Add a new activity</a></h3>
 
 {% endblock content %}
 
-
-
-{% comment "Optional note" %}
-    <input type="radio" name="activity" id="activity{{ forloop.counter }}" 
-			value="{{ activity.id }}" />
-			
-	<label for="activity{{ forloop.counter }}">
-		{{ activity.activity_title }} 
-		</label><br />
-{% endcomment %}

@@ -1,0 +1,124 @@
+ body {
+  font-family: monaco, monospace;
+  background: url(https://cgaskell9367.files.wordpress.com/2015/04/watercolor2.jpg) 50%;
+}
+
+
+#title{
+  display: inline-block;
+  color: Lime ;
+  border-style: solid;
+  border-width: 5px;
+  border-color:Teal;
+  background-color: grey;
+  border-radius: 20px;
+  padding: 2%;
+  text-align:center;
+  width: 79%;
+  line-height: 5px;
+
+  
+}
+
+#activity-stats{
+    line-height: 35px;
+    font-size: 1px;
+    border-style: solid;
+    border-width: 5px;
+    border-color:Teal;
+    border-radius: 25px;
+    background-color: grey;
+    display: inline-block;
+    color: Lime;
+    padding: 2%;
+    float:left;
+    margin:30;
+    position: absolute;
+    top: 37%;
+    left: 10%;
+    line-height: 5px;
+
+}
+
+#start-button{
+    width: 130px;
+    height: 50px;
+    background-color: lime; /* Green */
+    border: solid;
+    color: black;
+    padding: 15px 32px;
+    border-color:black;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 37%;
+    right: 30%;
+
+}
+
+#stop-button{
+    width: 130px;
+    height: 50px;
+    background-color: red; /* Green */
+    border: solid;
+    color: black;
+    padding: 15px 32px;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 37%;
+    right: 17%
+    
+    
+}
+
+#edit-button{
+    width: 130px;
+    height: 50px;
+    background-color: DarkOrange ; /* Green */
+    border: solid;
+    color: black;
+    padding: 13px 39.6px;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 43.3%;
+    right: 30%
+    
+}
+
+#insert-button{
+    width: 130px;
+    height: 50px;
+    background-color: MediumTurquoise ; /* Green */
+    border: solid;
+    color: black;
+    padding: 12px 29px;
+    font-size: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: absolute;
+    top: 43.3%;
+    right: 17%
+
+}
+
+
+
+
+
+
+
+h1 {
+  font-size: 40px
+  
+}
+h2 {
+  font-size: 24px;
+}
+
+
+

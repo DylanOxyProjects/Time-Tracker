@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 
 class Activity(models.Model):
     activity_title = models.CharField(max_length=50)
-    activity_time = models.TimeField(auto_now_add=False)
+    #activity_time = models.TimeField(auto_now_add=False)
+    activity_time = models.CharField(max_length=50)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):

@@ -1,33 +1,43 @@
 {% extends "timer/base.html" %}
+{% load static %}
 
 {% block header %}
+
+    
+
+    <link rel="stylesheet" href="{% static 'index_style.css' %}"></link>
+
+    
+    
+
+
     <div class='jumbotron'>
-        <h1>Track your dreams</h1>
+        <h1>Track Your Dreams</h1>
     </div>
 {% endblock header %}
 
 
 {% block content %}
 
-    <h2>
-        <a href="{% url 'users:register' %}">Register an acoount to</a> to track
-        your activities.
-    </h2>
-    
-    <h2>
-        They say it takes 10,000 hours to become a professional at something.  
-        
-        Lets see what you can do! :)
+    {% if user.is_authenticated %}
+        <h2>
+                Welcome, {{ user.username }}!  
+                
+                They say it takes 10,000 hours to become a professional at something.  
+                Lets see what you can do! :)
+        </h2>
+    {% else %}
+        <h2>
+            <a href="{% url 'users:register' %}">Register</a> a <a href="{% url 'timer:index' %}">Time Tracker</a> acoount to to track your activities.
+            <br>
+            <br>
+            I promise you wont regret it :)
+        </h2>
+
+    {% endif %}
+
+
 {% endblock content %}
-
-
-
-
-
-
-
-
-
 
 
 {% comment %}

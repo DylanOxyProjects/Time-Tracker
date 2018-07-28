@@ -1,27 +1,44 @@
 {% extends "timer/base.html" %}
 {% load static %}
 
-{% block header %}{% endblock header %}
+{% include "activities.html" %}
 
-    <h2>{{ activity }}</h2>
 {% block content %}
 
-    <link rel="stylesheet" type="text/css" href='{% static "detail_style.css" %}'>
+<link rel="stylesheet" href="{% static 'activity_detail_style.css' %}" type="text/css" />
 
 
+<div id="container">
+  
+    <div id="title"> 
+      <h1><span id="activity-title">{{ activity.activity_title }}</span></h1><br>
+      <h2>TOTAL TIME: <span id="total-time">{{ activity.activity_time }}</span></h2>
+    </div>
+  
+    <div id="activity-stats">
+      <h2 id="current-time">Current Time -----  <span id="currentTime">0000:00:00.000</span></h2>
+      <h2 id="current-level">Current Level ---- Absolute Beginner</h2>
+      <h2 id="next-level">Next level --------- Beginner</h2>
+      <h2 id="next-level-time">Level Up In ------- 0000:00:00.000</h2>
+    </div>
+    
+    <div id="buttons">
+      <button id="start-button">START</button>
+      <button id="stop-button">STOP</button>
+      <button id="edit-button">EDIT</button>
+      <button id="insert-button">INSERT</button>
+    </div>
+  
+  </div>
 
-    <h3><p>Activity Name: <b>{{activity}}</b></p> </h3>
-    <h3><p>Activity Time: <b>{{activity.activity_time}}</b></p></h3>
-	
-    <form action="{% url 'timer:edit_activity' activity.id%}" method="get">
-        <input type="submit" class="btn" value="edit" name="edit_button">
-    </form>
-	
-    <form action="{% url 'timer:delete_activity' activity.id%}" method="get">
-        <input type="submit" class="btn" value="delete" name="delete_button">
-    </form>
+<script src="{% static 'stopwatch.js' %}" type="text/javascript"></script>
+<script src="{% static 'main.js' %}" type="text/javascript"></script>
+<script src="{% static 'ajaxUpdate.js' %}" type="text/javascript"></script>
+{% csrf_token %}
+
 
 
 
 {% endblock content %}
+
 

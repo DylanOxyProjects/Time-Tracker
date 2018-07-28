@@ -1,11 +1,13 @@
 from django.shortcuts import get_object_or_404, render, reverse
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse 
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from timer.stopwatch import Timer
 
 from timer.models import Activity
 from timer.forms import ActivityForm, ActivityFormEdit
+
+from datetime import timedelta
+import json
 
 def index(request):
     return render(request, 'timer/index.html') 
@@ -15,21 +17,42 @@ def activities(request):
     
     activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]
     context = {'activities':activities}
-    #the render() function takes the rquest object as its first argument, a template name as its second
-    #argument and a dictionary as its optional third argument. It returns an HttpResponse object of the given
-    #template rendered with the given context
     return render(request, 'timer/activities.html', context)
 
-@login_required 
-def activity_detail(request, activity_id):
-
-    activity = Activity.objects.get(id=activity_id)
-    #make sure the topic belonds to the curent user
+@login_required
+def activity_detail(request, activity_title):
+    activity = Activity.objects.get(activity_title=activity_title)
     if activity.owner != request.user:
         raise Http404
-    return render(request, 'timer/activity_detail.html', {'activity': activity})
+    
+    if (len(activity.activity_time) != 14):
+        activity.activity_time = "0000:00:00.000"
+        
+    context = {'activity':activity}
+    return render(request, 'timer/activity_detail.html', context)
 
 
+@login_required
+def update_stopwatch(request):
+    """
+    incorporates ajax. every 4-5 seconds sends updates
+    on new activity_time to be stored while the user
+    is using the stopwatch in activity_detail
+    """
+    updateString = request.body.decode("utf-8")
+    updateStringList = updateString.split('$$TEXT$$')
+    time = updateStringList[0]
+    activity = Activity.objects.get(activity_title=updateStringList[1])
+    
+    if activity.owner != request.user:
+        raise Http404  
+    
+    activity.activity_time = time
+    activity.save()
+    return HttpResponse("")
+    
+    
+    
 @login_required 
 def new_activity(request):
     """Add a new activity"""
@@ -67,7 +90,7 @@ def edit_activity(request, activity_id):
         form = ActivityFormEdit(instance=activity, data=request.POST)
         if form.is_valid:
             form.save()
-            return HttpResponseRedirect(reverse('timer:activity_detail', args=[activity.id]))
+            return HttpResponseRedirect(reverse('timer:activities'))
         
     context = {'activity': activity, 'form': form}
     return render(request, 'timer/edit_activity.html', context)
