@@ -132,6 +132,7 @@ STATIC_URL = '/static/'
 
 #My settings
 LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = 'timer:activities'
 
 #settings for django-bootstrap3
 BOOTSTRAP3 = {

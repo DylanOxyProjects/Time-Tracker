@@ -1,28 +1,49 @@
 {% extends "timer/base.html" %}
+{% load bootstrap3 %}
 {% load static %}
-{% block header %}
-
-    
-
-{% endblock header%}
 
 {% block content %}
 
-<link rel="stylesheet" href="{% static 'activity_detail_style.css' %}" type="text/css" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>activities</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'activitiesStyle.css' %}" type="text/css" />
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-	<div id="activitiesList">
-    	{% for activity in activities %}
-		<h4><a href="{% url 'timer:activity_detail' activity.activity_title %}">{{ activity.activity_title }}</a> </h4>
-		<h5>{{ activity.activity_time }}</h5>
+<div class="container">
+           
+		<table class="table table-bordered">
+			
+		  <thead>
+			<tr class="info">
+			  <th>Activity #</th>
+			  <th>Activity Title</th>
+			  <th>Activity Time</th>
+			</tr>
+		  </thead>
+		  {% for activity in activities %}
+			<tbody>
+				<tr class="info">
+				<td>{{ forloop.counter }}</td>
+				<td><a href="{% url 'timer:activity_detail' activity.id %}">{{ activity.activity_title }}</a></td>
+				<td>{{ activity.activity_time }}</td>
+				</tr>
+			</tbody>
+			{% endfor %}
+		</table>
+</div>
 
-	</div>
 	
-	<form action="{% url 'timer:activities'%}" method="post">{% csrf_token %}</form>
 
-    {% empty %}
-	<p>You dont have any activities yet!</p>
-    {% endfor %}	
-
+</body>
+</html>
 {% endblock content %}
 

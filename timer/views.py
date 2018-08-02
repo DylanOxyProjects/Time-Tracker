@@ -9,6 +9,8 @@ from timer.forms import ActivityForm, ActivityFormEdit
 from datetime import timedelta
 import json
 
+from django.contrib import messages
+
 def index(request):
     return render(request, 'timer/index.html') 
 
@@ -20,15 +22,17 @@ def activities(request):
     return render(request, 'timer/activities.html', context)
 
 @login_required
-def activity_detail(request, activity_title):
-    activity = Activity.objects.get(activity_title=activity_title)
+def activity_detail(request, activity_id):
+    activity = Activity.objects.get(pk=activity_id)
     if activity.owner != request.user:
         raise Http404
     
     if (len(activity.activity_time) != 14):
         activity.activity_time = "0000:00:00.000"
         
-    context = {'activity':activity}
+    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]   
+    
+    context = {'activity':activity, 'activities': activities}
     return render(request, 'timer/activity_detail.html', context)
 
 
@@ -42,7 +46,7 @@ def update_stopwatch(request):
     updateString = request.body.decode("utf-8")
     updateStringList = updateString.split('$$TEXT$$')
     time = updateStringList[0]
-    activity = Activity.objects.get(activity_title=updateStringList[1])
+    activity = Activity.objects.get(pk=int(updateStringList[1]))
     
     if activity.owner != request.user:
         raise Http404  
@@ -50,9 +54,19 @@ def update_stopwatch(request):
     activity.activity_time = time
     activity.save()
     return HttpResponse("")
+
+@login_required 
+def editActivityTitle(request):
+    updateTitle = request.body.decode("utf-8")
+    updateTitleList = updateTitle.split('$$TEXT$$')
+    activity = Activity.objects.get(pk=int(updateTitleList[1]))
     
-    
-    
+    if activity.owner != request.user:
+        raise Http404     
+    activity.activity_title = updateTitleList[0]
+    activity.save()
+    return HttpResponse("")
+ 
 @login_required 
 def new_activity(request):
     """Add a new activity"""
@@ -65,41 +79,31 @@ def new_activity(request):
         if form.is_valid():   
             new_activity = form.save(commit=False)
             new_activity.owner = request.user
+        try:
+            activity = Activity.objects.get(activity_title=new_activity.activity_title)
+            msgText =  "You already have an activity called " + new_activity.activity_title + "!"
+            messages.info(request, msgText)
+            return HttpResponseRedirect(reverse('timer:new_activity'))             
+        except:
+            pass 
             new_activity.save()
-            
-            
-            #activity_title = form.cleaned_data['activity_title']
-            #activity = Activity.objects.filter(activity_title=activity_title)
-            
             return HttpResponseRedirect(reverse('timer:activities'))   
+        
     context = {'form': form}   
     return render(request, 'timer/new_activity.html', context)
 
-@login_required 
-def edit_activity(request, activity_id):
-    """Edit an existing activity"""
-    activity = Activity.objects.get(id=activity_id)
-    if activity.owner != request.user:
-        raise Http404
-    
-    if request.method != 'POST':
-        #initial request; pre-fill form with current entry
-        form = ActivityFormEdit(instance=activity)
-    else:
-        # POST data submitted; process data
-        form = ActivityFormEdit(instance=activity, data=request.POST)
-        if form.is_valid:
-            form.save()
-            return HttpResponseRedirect(reverse('timer:activities'))
-        
-    context = {'activity': activity, 'form': form}
-    return render(request, 'timer/edit_activity.html', context)
 
 @login_required 
 def delete_activity(request, activity_id):
-    """delete an existing activity"""
-    activity = Activity.objects.get(id=activity_id)
+    activityInfo = request.body.decode("utf-8")
+    
+    activity = Activity.objects.get(pk=activity_id)
+    
     if activity.owner != request.user:
         raise Http404    
+    
     activity.delete()
-    return HttpResponseRedirect(reverse('timer:activities')) 
+    return HttpResponseRedirect(reverse('timer:activities'))
+
+   
+    
