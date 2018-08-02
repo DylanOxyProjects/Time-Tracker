@@ -47,17 +47,16 @@
         </div>
         </div>
     </div>
-
+    <div id="test">
     <div id="mainDiv" class="col-sm-10">
 
+        
+
         <div class="row">
-            
               <div id="title">
                   <h1><span id="activity-title">{{ activity.activity_title }}</span></h1><br>
-                  <h2><a  href="{% url 'timer:delete_activity' activity.id %}"><span  id="deleteActivity">DELETE</span></a></h2>
                   <h2>TOTAL TIME:  <span id="total-time">{{ activity.activity_time }}</span></h2>
-              </div>
-            
+              </div>     
         </div>
 
 
@@ -84,7 +83,8 @@
                                             <button type="button" class="btn btn-primary" id="stopBTN">STOP </button>
                                             <button type="button" class="btn btn-primary" id="editBTN">EDIT</button>
                                             <button type="button" class="btn btn-primary" id="insertBTN">INSERT</button>
-                                            
+                                            <h2><a  href="{% url 'timer:delete_activity' activity.id %}"><span  id="deleteActivity">DELETE</span></a></h2>
+
                                     </div>
                             </div>
                 </div>
@@ -93,7 +93,7 @@
 
 
     </div>
-
+    </div>
   </div>
 
 <script src="{% static 'stopwatch.js' %}" type="text/javascript"></script>

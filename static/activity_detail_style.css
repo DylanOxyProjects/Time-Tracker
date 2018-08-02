@@ -4,6 +4,8 @@ body{
 }
 
 
+
+
 .list-group-item{
   border-color: transparent;
   background-color:  rgb(226, 242, 255)  ;
@@ -16,29 +18,33 @@ body{
 
 #scrollBar{
   background-color:  rgb(226, 242, 255)  ;
-  height: 1000px;
+  height: 500px;
 }
 
 #mainDiv{
-  background-color:  rgb(232, 255, 255)  ;
-  height: 1000px;
+  background-color: rgb(226, 242, 255)  ;
+  height:500px;
 
 }
+
+
 
 #title{
-  color: teal ;
-  background-color: rgb(232, 255, 255)  ;
-  text-align:center;
+  color: white ;
+  background-color: teal  ;
+  text-align: center;
   margin-left: 10px;
-  
-
+  border-style: solid;
+  border-color: lime;
+  border-width: 5px;
 }
+
+
 #activity-stats{
   color: teal;
-  background-color: rgb(232, 255, 255)  ;
+  background-color: rgb(226, 242, 255)  ;
   margin-left: 10px;
-  text-align:center;
-
+  text-align: left;
 }
 
 #buttons{
@@ -50,6 +56,7 @@ body{
   
 
 }
+
 
 #startBTN{
   width: 20%;
@@ -71,6 +78,7 @@ body{
   border-width: 3px;
   border-color:teal;
   font-weight: bold;
+  
   
 }
 
