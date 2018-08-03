@@ -60,7 +60,8 @@
 		{% if user.is_authenticated %}
 			<div id="navbar" class="navbar-collapse collapse">
 	        	<ul class="nav navbar-nav navbar">
-		    	<li><a href="{% url 'timer:new_activity' %}"><b><span class="navbarColor">Create Activity</span> </b></a></li>
+				<li><a href="{% url 'timer:new_activity' %}"><b><span class="navbarColor">Create Activity</span> </b></a></li>
+
 			</ul>
 		{% else %}	
 			<form class="navbar-form navbar-right" method="POST" action='{% url 'users:login' %}'>{% csrf_token %}

@@ -1,0 +1,101 @@
+{% extends "timer/activities.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<link rel="stylesheet" href="{% static 'insertTime.css' %}" type="text/css" />
+<style>
+
+#highlightActivity{
+    color:red;
+    font-weight: bold;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+</style>
+
+
+<body>
+
+<div class="container">
+
+  <form class="form-horizontal" action="/action_page.php">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="activities">Activity:</label>
+      <div class="col-sm-10">
+          <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="activities" data-toggle="dropdown">Select 1
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+                    {% for activityItem in activities %}
+                        {% if activityItem.activity_title == activity.activity_title %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="highlightActivity">{{activityItem.activity_title}}</a></li> 
+                        {% else %}
+                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{activityItem.activity_title}}</a></li> 
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="hours">Hours:</label>
+      <div class="col-sm-10">   
+          <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="hours" data-toggle="dropdown">0
+                <span class="caret"></span></button>
+                <ul  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+                    {% for nmbr in nmbrList %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1">{{nmbr}}</a></li> 
+                    {% endfor %}
+                </ul>
+          </div>       
+      </div>
+    </div>
+    <div class="form-group">        
+      <label class="control-label col-sm-2" for="mins">Minutes:</label>
+      <div class="col-sm-10">   
+          <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="mins" data-toggle="dropdown">0
+                <span class="caret"></span></button>
+                <ul  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
+                    {% for nmbr in nmbrList %}
+                        <li role="presentation"><a role="menuitem" tabindex="-1">{{nmbr}}</a></li> 
+                    {% endfor %}
+                </ul>
+          </div>       
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Submit</button>
+      </div>
+    </div>
+  </form>
+  
+</div>
+
+
+{% csrf_token %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+{% endblock content %}
+
+

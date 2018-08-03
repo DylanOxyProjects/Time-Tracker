@@ -47,15 +47,17 @@
         </div>
         </div>
     </div>
-    <div id="test">
     <div id="mainDiv" class="col-sm-10">
 
         
 
         <div class="row">
               <div id="title">
-                  <h1><span id="activity-title">{{ activity.activity_title }}</span></h1><br>
-                  <h2>TOTAL TIME:  <span id="total-time">{{ activity.activity_time }}</span></h2>
+                <button type="button" class="btn-warning" id="editBTN">EDIT</button>
+                <h1><span id="activity-title">{{ activity.activity_title }}</span></h1><br>
+                <h2>TOTAL TIME:  <span id="total-time">{{ activity.activity_time }}</span></h2>
+                <button type="button" class="btn-success" id="startBTN">START </button>
+                <button type="button" class="btn-success" id="stopBTN">STOP </button>
               </div>     
         </div>
 
@@ -71,28 +73,12 @@
                     <h2 id="current-level">Current Level:  Absolute Beginner</h2>
                     <h2 id="next-level">Next level:  Beginner</h2>
                     <h2 id="next-level-time">Level Up In:  0000:00:00.000</h2>
+                    <h4><a href="{% url 'timer:delete_activity' activity.id %}"><span id="deleteActivity">DELETE</span></a></h4>
+                    <h4><a href="{% url 'timer:insertTime' activity.id %}"><span id="insertTimeDiv">INSERT</span></a></h4>
+
                     
               </div>
         </div>
-
-        <div class="row">
-                <div id="buttons">
-                            <div class="row">
-                                    <div class="btn-group btn-group-justified">
-                                            <button type="button" class="btn btn-primary" id="startBTN">START </button>
-                                            <button type="button" class="btn btn-primary" id="stopBTN">STOP </button>
-                                            <button type="button" class="btn btn-primary" id="editBTN">EDIT</button>
-                                            <button type="button" class="btn btn-primary" id="insertBTN">INSERT</button>
-                                            <h2><a  href="{% url 'timer:delete_activity' activity.id %}"><span  id="deleteActivity">DELETE</span></a></h2>
-
-                                    </div>
-                            </div>
-                </div>
-            </div>
-
-
-
-    </div>
     </div>
   </div>
 

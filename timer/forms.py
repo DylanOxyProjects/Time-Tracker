@@ -7,10 +7,6 @@ class ActivityForm(forms.ModelForm):
         model = Activity
         fields = ['activity_title']
 
-class ActivityFormEdit(forms.ModelForm):
-    class Meta:
-        model = Activity
-        fields = ['activity_title']
         
     
     

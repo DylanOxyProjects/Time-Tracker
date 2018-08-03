@@ -7,9 +7,11 @@ var insertBTN = document.getElementById("insertBTN");
 
 // create boolean var to prevent multiple edit presses from altering title text
 var showTitleInput = true;
-
 //hide delete BTN on page refresh
 toggleDeleteButtonOff()
+
+
+
 
 var totalTimeKeeper = new Stopwatch(timer);
 var currentTimeKeeper = new Stopwatch(currentTime);
@@ -34,8 +36,13 @@ stopBTN.addEventListener("click", function(){
 editBTN.addEventListener("click", function(){
 
     toggleDeleteButtonOn()
+
     //get h1 text
     var activityTitle = document.getElementById("activity-title");
+
+    //get insert form
+    var insertForm = document.getElementById("insertForm");
+
 
     //store h1 title for use
     var activityTitleTxt = activityTitle.innerHTML;
@@ -61,7 +68,10 @@ editBTN.addEventListener("click", function(){
 
         //changes h1 title
         activityTitle.innerHTML = activityTitleInput.value;
+
+
         toggleDeleteButtonOff()
+
         showTitleInput = true;
     }
 
@@ -69,11 +79,10 @@ editBTN.addEventListener("click", function(){
         activityTitle.innerHTML = '<input type="text" name="activity-title" placeholder="activityTitle" value="'+ activityTitle.innerHTML +'"/>'
         + '<button type="button" class="btn-primary" onclick="saveHandler()">SAVE</button>';
         showTitleInput = false;
+
     }
     else{
 
     }
 });
 
-
- 

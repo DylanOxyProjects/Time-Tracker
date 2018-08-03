@@ -30,7 +30,7 @@ body{
 
 
 #title{
-  color: white ;
+  color: lime ;
   background-color: teal  ;
   text-align: center;
   margin-left: 10px;
@@ -59,38 +59,21 @@ body{
 
 
 #startBTN{
-  width: 20%;
-  background-color:rgb(65, 177, 61);
-  height:100%;
-  color: rgb(255, 255, 255) ;
-  border-style: solid;
-  border-width: 3px;
-  border-color:teal;
   font-weight: bold;
-  margin-left: 15px;
 }
 #stopBTN{
-  width: 20%;
-  background-color:rgb(184, 10, 10);
-  height:100%;
-  color: white ;
-  border-style: solid;
-  border-width: 3px;
-  border-color:teal;
   font-weight: bold;
-  
-  
+  background-color: red;
+  border-color: orangered;
+
 }
 
 #editBTN{
-  width: 20%;
-  background-color:rgb(255, 121, 44) ;
-  height:100%;
-  color: white;
-  border-style: solid;
-  border-width: 3px;
-  border-color:teal;
   font-weight: bold;
+  float: right;
+  background-color: teal;
+  border-color: lime;
+
   
 }
 #insertBTN{
@@ -107,8 +90,21 @@ body{
 #deleteActivity{
   color: white;
   background-color: red;
-  border-color: teal;
-  padding: 6px;
+  border-color: rgb(255, 61, 61);
   float:right;
+  border-style: solid;
+  border-width: 4px;
+  font-weight: bold;
+
 }
- 
+#insertTimeDiv{
+  color: white;
+  background-color: rgb(89, 128, 245);
+  border-style: solid;
+  border-color: rgb(115, 152, 255);
+  border-width: 4px;
+  font-weight: bold;
+  border-style: solid;
+  float:right;
+
+}

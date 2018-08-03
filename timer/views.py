@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from timer.models import Activity
-from timer.forms import ActivityForm, ActivityFormEdit
+from timer.forms import ActivityForm
 
 from datetime import timedelta
 import json
@@ -62,10 +62,31 @@ def editActivityTitle(request):
     activity = Activity.objects.get(pk=int(updateTitleList[1]))
     
     if activity.owner != request.user:
-        raise Http404     
+        raise Http404   
+    
     activity.activity_title = updateTitleList[0]
     activity.save()
     return HttpResponse("")
+
+
+@login_required
+def insertTime(request, activity_id):
+    
+    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]   
+    activity = Activity.objects.get(pk=activity_id)
+    
+    if activity.owner != request.user:
+        raise Http404  
+    
+    nmbrList = []
+    for x in range(1000):
+        nmbrList.append(x)
+    
+    context = {'activity':activity, 'activities': activities, 'nmbrList':nmbrList}
+    return render(request, 'timer/insertTime.html', context)
+    
+
+    
  
 @login_required 
 def new_activity(request):
@@ -104,6 +125,8 @@ def delete_activity(request, activity_id):
     
     activity.delete()
     return HttpResponseRedirect(reverse('timer:activities'))
+
+
 
    
     
