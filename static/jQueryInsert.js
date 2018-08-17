@@ -1,13 +1,40 @@
 $(document).ready(function(){
-    $("#insertDivID").hide();
 
-    $("#insertTimeBTN").click(function(){
-        $("#insertDivID").toggle();
-        $("#stopBTN").click();
-    });
+    var hourAppendTxt = "00";
+    var minAppendTxt = "00";
+    $("#firstActivityItem").hide(); 
+
+
+    function saveTime(){
+        var activityID = $("#activityID").text();
+
+        var currentTime = $("#total-time").text();
+        currentTimeList = currentTime.split(":");
+        currentTimeHours = parseInt(currentTimeList[0]);
+
+        var currentLevel = $("#activityLVL").text();
+        var newLvl = levelWatch(currentLevel, currentTimeHours);
+        $("#activityLVL").text(newLvl);
+
+
+
+
+        $.ajax({
+            url:'/timer/activities/autoSave/',
+            type: 'POST',
+            data:JSON.stringify({ 
+                activityID: activityID,
+                currentTime: currentTime, 
+                newLvl: newLvl
+            }) 
+        });
+    }
+
+
 
     $("#delBTN").click(function(){
         var activityID = $("#activityID").text();
+        jQuery('#firstActivityItem')[0].click();
 
         $.ajax({
             url:'/timer/activities/deleteActivity/',
@@ -16,8 +43,9 @@ $(document).ready(function(){
                 acitivityID: activityID
             }) 
         });
+
         
-        $(activityID).text("hi");
+        
 
 
     });
@@ -37,16 +65,32 @@ $(document).ready(function(){
         }
     });
 
+
+
     $(".hourChoice").click(function(){
         $("#hourTXT").text(this.text);
+        hourAppendTxt = this.text;
+        if (parseInt(hourAppendTxt) < 10){
+            hourAppendTxt = "0" + hourAppendTxt;
+        }
+        $("#submitTxt").text(hourAppendTxt + ":" + minAppendTxt + ":00.000");
+
     });
 
     $(".minsChoice").click(function(){
         $("#minTXT").text(this.text);
+        minAppendTxt = this.text;
+        if (parseInt(minAppendTxt) < 10){
+            minAppendTxt = "0" + minAppendTxt;
+        }
+        $("#submitTxt").text(hourAppendTxt + ":" + minAppendTxt + ":00.000");
 
     });
+
+    $("#submitTxt").text(hourAppendTxt + ":" + minAppendTxt + ":00.000");
     
     $("#submitTimeBTN").click(function(){
+        $("#stopBTN").click();
         var activityID = $("#activityID").text();
         var hours = $("#hourTXT").text();
         var minutes = $("#minTXT").text();
@@ -60,15 +104,13 @@ $(document).ready(function(){
                 minutes: minutes
             }) 
         });
-
-        //var totalTime = $("#total-time").text();
-       //var totalTimeSplit = totalTime.split(":");
-
-
-
-
-        
     });
+
+
+    window.setInterval(function(){saveTime()}, 5000);
+
+
+
 
 
 });

@@ -29,7 +29,6 @@ def activity_detail(request, activity_id):
         activityHoursInt = 0  
     else:
         activityHoursStr = activityTimeList[0] 
-        activityHoursInt = int(activityTimeList[0])         
    
     
     if activity.owner != request.user:
@@ -39,7 +38,14 @@ def activity_detail(request, activity_id):
         pass
         
         
-    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]   
+    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]
+    if (len(activities) >= 1):
+        firstActivity = activities[0]
+        
+    else:
+        raise Http404
+    
+    
     
     hourList = []
     for x in range(100):
@@ -49,7 +55,15 @@ def activity_detail(request, activity_id):
     for x in range(60):
         minList.append(x)  
         
-    context = {'activity':activity, 'activities': activities, 'hourList':hourList, 'minList':minList, 'activityHoursStr':activityHoursStr, 'activityHoursInt':activityHoursInt}
+    context = {
+        'activity' : activity, 
+        'activities' : activities, 
+        'hourList' : hourList, 
+        'minList' : minList, 
+        'activityHoursStr' : activityHoursStr, 
+        'activityLevel' : activity.activity_level,
+        'firstActivity' : firstActivity
+               }
     return render(request, 'timer/activity_detail.html', context)
 
 
@@ -133,13 +147,6 @@ def deleteActivity(request):
     return HttpResponseRedirect(reverse('timer:activities'))   
     
     
-        
-        
-    
-    
-
-    
- 
 @login_required 
 def new_activity(request):
     """Add a new activity"""
@@ -166,19 +173,15 @@ def new_activity(request):
     return render(request, 'timer/new_activity.html', context)
 
 
-@login_required 
-def delete_activity(request, activity_id):
-    activityInfo = request.body.decode("utf-8")
-    
-    activity = Activity.objects.get(pk=activity_id)
-    
-    if activity.owner != request.user:
-        raise Http404    
-    
-    activity.delete()
-    return HttpResponseRedirect(reverse('timer:activities'))
+@login_required
+def autoSave(request):
+    activityInfo = json.loads(request.body)
+    activity = Activity.objects.get(pk=activityInfo['activityID'])    
+    activity.activity_time = activityInfo['currentTime']
+    activity.activity_level = activityInfo['newLvl']
+    activity.save()
+    return HttpResponse("")
 
 
-
-   
+    
     

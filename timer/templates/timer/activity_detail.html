@@ -26,16 +26,14 @@
 <div class="container">
     <p hidden id="deleteBtnDiv">{{ activity.id }}</p>
     <p hidden id="activityHoursStr">{{ activityHoursStr }}</p>
-    <p hidden id="activityHoursInt">{{ activityHoursInt }}</p>
-    <div ID="scrollBar" class="col-sm-2 sidenav">
+    <a id="firstActivityItem" href="{% url 'timer:activity_detail' firstActivity.id  %}"></a>
+    <div ID="scrollBar" class="col-sm-3 sidenav">
         <div >
         <div id="innerScrollBar" class="nav nav-pills nav-stacked">
             {% for activityTitle in activities %}
                 <p hidden id="activityID">{{ activity.id }}</p>
                 {% if activityTitle.activity_title == activity.activity_title %}
-                    <div id="removeVar">
-                        <a id="{{ activityTitle.id }}" class="list-group-item active" href="{% url 'timer:activity_detail' activityTitle.id %}">{{ forloop.counter }}. <span id="{{ activityTitle.id }}">{{ activityTitle.activity_title }}</span></a> 
-                    </div>
+                    <a id="{{ activityTitle.id }}" class="list-group-item active" href="{% url 'timer:activity_detail' activityTitle.id %}">{{ forloop.counter }}. <span id="{{ activityTitle.id }}">{{ activityTitle.activity_title }}</span></a> 
                 {% else %}
                     <a id="{{ activityTitle.id }}" class="list-group-item" href="{% url 'timer:activity_detail' activityTitle.id %}"><span class="textColor">{{ forloop.counter }}. </span><span id="{{ activityTitle.id }}" class="textColor">{{ activityTitle.activity_title }}</span></a>
                 {% endif %}
@@ -43,9 +41,7 @@
         </div>
         </div>
     </div>
-    <div id="mainDiv" class="col-sm-10">
-
-        
+    <div id="mainDiv" class="col-sm-9">
 
         <div class="row">
               <div id="title">
@@ -57,20 +53,20 @@
                 <div id="btns">
                     <button type="button" class="btn-success" id="startBTN">START </button>
                     <button hidden type="button" class="btn-success" id="stopBTN">STOP </button>
-                    <button type="button" class="btn-success" id="insertTimeBTN">LOG TIME</button>
                 </div>
               </div>     
         </div>
-
         <div class="row">
-            <div class="col-sm-10">
-                <div id="insertDivID" class="insertDiv">
+                <div class="col-sm-4" id="levelDiv">
+                    <h2 id="aqua">Level: <span id="activityLVL">{{ activityLevel }}</span></h2>
+                </div>
+            <div class="col-sm-5" id="insertDiv">
+                <div  id="insertDivID">
                         <form class="form-horizontal">
                             <div class="form-group">
                               <label class="control-label col-sm-2" for="activitiesBTN">Activity</label>
-                              <div class="col-sm-10">
                                   <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="activitiesBTN" data-toggle="dropdown"><span id="activitiesTXT">Select 1</span>
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="activitiesBTN" data-toggle="dropdown"><span id="activitiesTXT">Select 1</span>
                                         <span class="caret"></span></button>
                                         <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
                                             {% for activityItem in activities %}
@@ -82,13 +78,11 @@
                                             {% endfor %}
                                         </ul>
                                     </div>
-                              </div>
                             </div>
                             <div class="form-group">
                               <label class="control-label col-sm-2" for="hours">Hours</label>
-                              <div class="col-sm-10">   
                                   <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="hours" data-toggle="dropdown"><span id="hourTXT">0</span>
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="hours" data-toggle="dropdown"><span id="hourTXT">0</span>
                                         <span class="caret"></span></button>
                                         <ul  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
                                             {% for nmbr in hourList %}
@@ -96,13 +90,11 @@
                                             {% endfor %}
                                         </ul>
                                   </div>       
-                              </div>
                             </div>
                             <div class="form-group">        
                               <label class="control-label col-sm-2" for="mins">Minutes</label>
-                              <div class="col-sm-10">   
                                   <div class="dropdown">
-                                        <button class="btn btn-default dropdown-toggle" type="button" id="mins" data-toggle="dropdown"><span id="minTXT">0</span>
+                                        <button class="btn btn-success dropdown-toggle" type="button" id="mins" data-toggle="dropdown"><span id="minTXT">0</span>
                                         <span class="caret"></span></button>
                                         <ul  class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu1">
                                             {% for nmbr in minList %}
@@ -110,16 +102,15 @@
                                             {% endfor %}
                                         </ul>
                                   </div>       
-                              </div>
                             </div>
                             <div class="form-group">        
-                              <div class="col-sm-offset-2 col-sm-10">
-                                <button id="submitTimeBTN" class="btn btn-default">Submit</button>
-                              </div>
+                                <label class="control-label col-sm-2" for="submitTimeBTN" id="submitTxt"></label>
+                                    <button id="submitTimeBTN" class="btn btn-success">Submit</button>
                             </div>
                           </form>
                 </div>
             </div>
+
         </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-function Stopwatch(stopwatchText, activityHoursStr, activityHoursInt){
+function Stopwatch(stopwatchText, activityHoursStr){
     
     var startTimer = true;
     var time;
@@ -118,6 +118,28 @@ function Stopwatch(stopwatchText, activityHoursStr, activityHoursInt){
 
     };
 
+}
+
+
+function levelWatch(currentLevel, currentHours){
+
+    // if at level 1, the algorithm shall create a var nextLevelHours = currentLevel * 3 + currentLevel
+    // so if currentLevel is 1 ... 1 * 3 + 1 = 4, so currentHours would have to be 4 to reach level 2.
+
+
+    currentLevel = parseInt(currentLevel);
+    var nextLevelHours = (currentLevel * 3) + currentLevel;
+
+    if (currentHours < nextLevelHours){
+        return currentLevel;
+    }
+    else{
+        while(currentHours >= nextLevelHours){
+            currentLevel++;
+            nextLevelHours = (currentLevel * 3) + currentLevel;
+        }
+    }
+    return currentLevel;
 }
 
 

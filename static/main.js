@@ -1,6 +1,5 @@
 var timer = document.getElementById("total-time");
 var timerHoursStr = document.getElementById("activityHoursStr").textContent;
-var activityHoursInt = document.getElementById("activityHoursInt").textContent;
 var currentTime = document.getElementById("currentTime");
 var startBTN = document.getElementById("startBTN");
 var stopBTN = document.getElementById("stopBTN");
@@ -14,8 +13,8 @@ var showTitleInput = true;
 
 
 
-var totalTimeKeeper = new Stopwatch(timer, timerHoursStr, activityHoursInt);
-var currentTimeKeeper = new Stopwatch(currentTime, "0", 0);
+var totalTimeKeeper = new Stopwatch(timer, timerHoursStr);
+var currentTimeKeeper = new Stopwatch(currentTime, "0");
 
 
 startBTN.addEventListener("click", function(){

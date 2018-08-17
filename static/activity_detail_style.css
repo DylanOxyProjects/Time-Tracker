@@ -30,12 +30,11 @@ body{
 
 
 #title{
-  color: lime ;
+  color: aquamarine ;
   background-color: teal  ;
   text-align: center;
-  margin-left: 10px;
   border-style: solid;
-  border-color: lime;
+  border-color: aquamarine;
   border-width: 5px;
 }
 
@@ -47,52 +46,43 @@ body{
   text-align: left;
 }
 
-#btns{
-  border-width: 5px;
-  border-color:teal;
-  margin-left:11px;
-  margin-top:15px;
-  margin-bottom:10px;
-  
-
-}
-
 
 #startBTN{
   margin-top: 15px;
+  margin-bottom: 5px;
   font-weight: bold;
-  background-color: teal;
+  background-color: rgb(4, 95, 65);
   border-color: lime;
-  width: 120px;
-}
-#stopBTN{
-  font-weight: bold;
-  background-color: teal;
-  border-color: lime;
-  width: 120px;
+  width:25%;
+  color: lime;
+
 }
 
-#insertTimeBTN{
-  font-weight: bold;
-  background-color: teal;
-  border-color: lime;
-  width: 120px;
-}
 
 
 
 #delBTN{
   font-weight: bold;
   float: right;
-  background-color: teal;
-  border-color: lime;
+  background-color: rgb(4, 95, 65);
+  border-color: aquamarine;
+  border-width: 1px;
+  margin-top: 5px;
+  margin-right: 3px;
+  color: lime;
+
 }
 
 #editBTN{
   font-weight: bold;
   float: right;
-  background-color: teal;
-  border-color: lime;
+  background-color: rgb(4, 95, 65);
+  border-color: aquamarine;
+  margin-right: 3px;
+  border-width: 1px;
+  margin-top: 5px;
+  color: lime;
+
 }
 #insertBTN{
   width: 20%;
@@ -114,26 +104,107 @@ body{
   background-color: teal;
   border-color: lime;
 }
-#insertTimeDiv{
-  color: white;
-  background-color: rgb(89, 128, 245);
-  border-style: solid;
-  border-color: rgb(115, 152, 255);
-  border-style: solid;
-  float:right;
-  background-color: teal;
-  border-color: lime;
-
-}
-
-
-#highlightActivity{
-  font-weight: bold;
-}
-
 
 .scrollable-menu {
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
+  
+}
+
+#insertDiv{
+  text-align: center;
+  color: lime;
+  background-color: teal  ;
+  margin-top: 10px;
+  border-style: solid;
+  border-color: aquamarine;
+  border-width: 5px 5px 5px 5px;
+  width: 50%;
+  
+}
+
+
+
+.activityChoice{
+  background-color: aquamarine;
+}
+.hourChoice{
+  background-color: aquamarine;
+
+}
+.minsChoice{
+  background-color: aquamarine;
+
+}
+
+#activitiesBTN{
+
+  color: lime;
+  font-weight: bold;
+  background-color: rgb(4, 95, 65);
+  border-color: aquamarine;
+  margin-left: 50px;
+}
+
+#hours{
+  color: lime;
+  font-weight: bold;
+  background-color:  rgb(4, 95, 65);
+  border-color: aquamarine;
+  margin-left: 50px;
+}
+
+#mins{
+  color: lime;
+  font-weight: bold;
+  background-color:  rgb(4, 95, 65);
+  border-color: aquamarine;
+  margin-left: 50px;
+}
+#submitTimeBTN{
+  color: lime;
+  font-weight: bold;
+  background-color:  rgb(4, 95, 65);
+  border-color: aquamarine;
+  margin-left: 50px;
+}
+
+.form-horizontal{
+  margin-top: 10px;
+}
+
+
+#levelDiv{
+  color: lime;
+  background-color: teal  ;
+  margin-top: 10px;
+  border-style: solid;
+  border-color: aquamarine;
+  border-width: 5px 0px 5px 5px;
+  width: 50%;
+}
+
+.control-label{
+  color: aquamarine;
+}
+
+#total-time{
+  color:lime;
+}
+
+#currentTime{
+  color: lime;
+}
+
+#aqua{
+  color:aquamarine;
+}
+
+#activityLVL{
+  color:lime;
+}
+
+.formBTNS{
+  margin-left: 40px;
 }

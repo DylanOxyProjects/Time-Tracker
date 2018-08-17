@@ -13,5 +13,7 @@ urlpatterns = [
     path('activities/editActivityTitle/', views.editActivityTitle, name="editActivityTitle"),
     path('activities/insertTime/', views.insertTime, name="insertTime"),
     path('activities/activity/<int:activity_id>/', views.activity_detail, name='activity_detail'),
+    path('activities/autoSave/', views.autoSave, name='autoSave'),
+    
 
 ]
