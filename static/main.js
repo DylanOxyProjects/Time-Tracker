@@ -1,4 +1,6 @@
 var timer = document.getElementById("total-time");
+var timerHoursStr = document.getElementById("activityHoursStr").textContent;
+var activityHoursInt = document.getElementById("activityHoursInt").textContent;
 var currentTime = document.getElementById("currentTime");
 var startBTN = document.getElementById("startBTN");
 var stopBTN = document.getElementById("stopBTN");
@@ -8,19 +10,27 @@ var insertBTN = document.getElementById("insertBTN");
 // create boolean var to prevent multiple edit presses from altering title text
 var showTitleInput = true;
 //hide delete BTN on page refresh
-toggleDeleteButtonOff()
 
 
 
 
-var totalTimeKeeper = new Stopwatch(timer);
-var currentTimeKeeper = new Stopwatch(currentTime);
+var totalTimeKeeper = new Stopwatch(timer, timerHoursStr, activityHoursInt);
+var currentTimeKeeper = new Stopwatch(currentTime, "0", 0);
 
 
 startBTN.addEventListener("click", function(){
     if (!totalTimeKeeper.isOn){
+        startBTN.textContent = "STOP";
         totalTimeKeeper.start();
         currentTimeKeeper.start();
+
+    }
+    else if(totalTimeKeeper.isOn){
+        startBTN.textContent = "START";
+
+        totalTimeKeeper.stop();
+        currentTimeKeeper.stop();
+        loadXMLDoc();
     }
 });
 
@@ -35,7 +45,6 @@ stopBTN.addEventListener("click", function(){
 
 editBTN.addEventListener("click", function(){
 
-    toggleDeleteButtonOn()
 
     //get h1 text
     var activityTitle = document.getElementById("activity-title");
@@ -70,7 +79,6 @@ editBTN.addEventListener("click", function(){
         activityTitle.innerHTML = activityTitleInput.value;
 
 
-        toggleDeleteButtonOff()
 
         showTitleInput = true;
     }

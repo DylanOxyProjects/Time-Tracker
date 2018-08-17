@@ -1,15 +1,14 @@
+import json
 from django.shortcuts import get_object_or_404, render, reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse 
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from timer.models import Activity
 from timer.forms import ActivityForm
 
-from datetime import timedelta
-import json
 
-from django.contrib import messages
 
 def index(request):
     return render(request, 'timer/index.html') 
@@ -24,15 +23,33 @@ def activities(request):
 @login_required
 def activity_detail(request, activity_id):
     activity = Activity.objects.get(pk=activity_id)
+    activityTimeList = activity.activity_time.split(":")
+    if (activityTimeList[0] == ""):
+        activityHoursStr = "0"
+        activityHoursInt = 0  
+    else:
+        activityHoursStr = activityTimeList[0] 
+        activityHoursInt = int(activityTimeList[0])         
+   
+    
     if activity.owner != request.user:
         raise Http404
     
     if (len(activity.activity_time) != 14):
-        activity.activity_time = "0000:00:00.000"
+        pass
+        
         
     activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]   
     
-    context = {'activity':activity, 'activities': activities}
+    hourList = []
+    for x in range(100):
+        hourList.append(x)  
+        
+    minList = []
+    for x in range(60):
+        minList.append(x)  
+        
+    context = {'activity':activity, 'activities': activities, 'hourList':hourList, 'minList':minList, 'activityHoursStr':activityHoursStr, 'activityHoursInt':activityHoursInt}
     return render(request, 'timer/activity_detail.html', context)
 
 
@@ -70,20 +87,55 @@ def editActivityTitle(request):
 
 
 @login_required
-def insertTime(request, activity_id):
+def insertTime(request):
+
+    #timeInsert = request.body.decode("utf-8")
+    data = json.loads(request.body)
+    activity = Activity.objects.get(pk=data['acitivityID'])
+    hoursAdd = int(data['hours'])
+    minutesAdd = int(data['minutes'])
     
-    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]   
-    activity = Activity.objects.get(pk=activity_id)
+    # get hours and minutes of activity before we add new hours and minutes
+    activityTimeList = activity.activity_time.split(":")
+    activityHours = int(activityTimeList[0])
+    activityMins = int(activityTimeList[1])
+    activitySecs = (activityTimeList[2])
     
-    if activity.owner != request.user:
-        raise Http404  
+    if (activityMins + minutesAdd >= 60):
+        activityHours += 1
+        activityHours += hoursAdd
+        
+        tempMins = (activityMins + minutesAdd) - 60
+        activityMins = tempMins
+    else:
+        activityHours += hoursAdd
+        activityMins += minutesAdd      
+        
+    activityHours = str(activityHours)
+    while (len(activityHours) < 4):
+        activityHours = '0' + activityHours
     
-    nmbrList = []
-    for x in range(1000):
-        nmbrList.append(x)
+    activityMins = str(activityMins)
+    while (len(activityMins) < 2):
+        activityMins = '0' + activityMins
+        
     
-    context = {'activity':activity, 'activities': activities, 'nmbrList':nmbrList}
-    return render(request, 'timer/insertTime.html', context)
+    timeSave = activityHours + ":" + activityMins + ":" + activitySecs
+    activity.activity_time = timeSave
+    activity.save()
+    return HttpResponse("")
+    
+    
+def deleteActivity(request):
+    data = json.loads(request.body)
+    activity = Activity.objects.get(pk=data['acitivityID'])
+    activity.delete()
+    return HttpResponseRedirect(reverse('timer:activities'))   
+    
+    
+        
+        
+    
     
 
     

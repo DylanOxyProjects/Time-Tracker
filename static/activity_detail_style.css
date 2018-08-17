@@ -47,11 +47,11 @@ body{
   text-align: left;
 }
 
-#buttons{
+#btns{
   border-width: 5px;
   border-color:teal;
   margin-left:11px;
-  margin-top:10px;
+  margin-top:15px;
   margin-bottom:10px;
   
 
@@ -59,13 +59,33 @@ body{
 
 
 #startBTN{
+  margin-top: 15px;
   font-weight: bold;
+  background-color: teal;
+  border-color: lime;
+  width: 120px;
 }
 #stopBTN{
   font-weight: bold;
-  background-color: red;
-  border-color: orangered;
+  background-color: teal;
+  border-color: lime;
+  width: 120px;
+}
 
+#insertTimeBTN{
+  font-weight: bold;
+  background-color: teal;
+  border-color: lime;
+  width: 120px;
+}
+
+
+
+#delBTN{
+  font-weight: bold;
+  float: right;
+  background-color: teal;
+  border-color: lime;
 }
 
 #editBTN{
@@ -73,8 +93,6 @@ body{
   float: right;
   background-color: teal;
   border-color: lime;
-
-  
 }
 #insertBTN{
   width: 20%;
@@ -93,18 +111,29 @@ body{
   border-color: rgb(255, 61, 61);
   float:right;
   border-style: solid;
-  border-width: 4px;
-  font-weight: bold;
-
+  background-color: teal;
+  border-color: lime;
 }
 #insertTimeDiv{
   color: white;
   background-color: rgb(89, 128, 245);
   border-style: solid;
   border-color: rgb(115, 152, 255);
-  border-width: 4px;
-  font-weight: bold;
   border-style: solid;
   float:right;
+  background-color: teal;
+  border-color: lime;
 
+}
+
+
+#highlightActivity{
+  font-weight: bold;
+}
+
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
 }
