@@ -14,91 +14,132 @@
 	
 	{% bootstrap_css %}
 	{% bootstrap_javascript %}
+
+	<style>
 	
-<style>
 
-	body{
-	background-color: Snow ;
-	font-family: monaco, monospace;
-	}
-	#test{
-		background-color:teal;
-	}
+		.textColor{
+			color: lime;
+		
+		}
 
-	.navbarColor{
-		color:snow;
-	}
+		.form-control{
+			color: lime;
+			background-color: black;
+			border-color: lime;
+		}
 
-</style>
+		.btn-success{
+			background-color: black;
+			color: lime;
+			border-color: lime;
+		}
+		#loginForm{
+			margin-left: 15px;
+		}
+
+		body{
+			font-family: monaco, monospace;
+
+		}	
+
+
+	</style>
 
 	</head>
 	
 	<body>
-	 
-	<!-- Static navbar -->
-	
-	<nav id="test" class="navbar navbar-inverse">
-	    <div class="container">
-	    
-	        <div class="navbar-header">
-		    <button type="button" class="navbar-toggle collapsed"
-		        data-toggle="collapse" data-target="navbar"
-		        aria-expanded="false" aria-controls="navbar">
-		    </button>
-		    
-		    <a class="navbar-brand" href="{% url 'timer:index' %}">
-		        <span class="navbarColor">Time Tracker</span></a>
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{% url 'timer:index' %}"><span class="textColor"><span class="glyphicon glyphicon-time"></span> TimeTracker</span></a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					{% if user.is_authenticated %}
+						<ul class="nav navbar-nav">
+							<li><a href="{% url 'timer:activities' %}"><span class="textColor"><span class="glyphicon glyphicon-tasks"></span> Activities</span></a></li>
+							<li><a href="{% url 'timer:new_activity' %}"><span class="textColor"><span class="glyphicon glyphicon-plus"></span> Create Activity</span></a></li>
+							<li><a href="#"><span class="textColor"><span class="glyphicon glyphicon-question-sign"></span> About</span></a></li>
+
+						</ul>	
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="{% url 'users:logout' %}"><span class="textColor"><span class="glyphicon glyphicon-log-out"></span> Logout</span></a></li>
+						</ul>
+					{% else %}
+						<ul class="nav navbar-nav">
+							<li><a href="#"><span class="textColor"><span class="glyphicon glyphicon-question-sign"></span> About</span></a></li>
+
+							<li><a href="{% url 'users:register' %}"><span class="textColor"><span class="glyphicon glyphicon-user"></span> Sign Up</span></a></li>
+
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+								<form id="loginForm" class="navbar-form navbar-right" method="POST" action="{% url 'users:login' %}">{% csrf_token %}
+									<div class="form-group">
+										<input type="text" class="form-control" id="username" placeholder="username" name="username">
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" id="pwd" placeholder="password" name="password">
+									</div>
+									<button type="submit" class="btn btn-success" value="{% url 'timer:index' %}"><span class="glyphicon glyphicon-log-in"></span> Login</button>
+								</form>							
+						</ul>	
+					{% endif %}
+				</div>
 			</div>
+		</nav>
 
-			
+		{% for message in messages %}
+			<div class="alert alert-success">
+				<a class="close" href="#" data-dismiss="alert">×</a>
+				{{ message }}
+
+			</div>
+		{% endfor %}
 		
-	    <div id="navbar" class="navbar-collapse collapse">
-	        <ul class="nav navbar-nav">
-		    <li><a href="{% url 'timer:activities' %}"><b><span class="navbarColor">Activities</span></b></a></li>
-		</ul>
-
-		{% if user.is_authenticated %}
-			<div id="navbar" class="navbar-collapse collapse">
-	        	<ul class="nav navbar-nav navbar">
-				<li><a href="{% url 'timer:new_activity' %}"><b><span class="navbarColor">Create Activity</span> </b></a></li>
-
-			</ul>
-		{% else %}	
-			<form class="navbar-form navbar-right" method="POST" action='{% url 'users:login' %}'>{% csrf_token %}
-				<div class="form-group">
-					<input type="text" class="form-control" name="username" placeholder="Username"/>
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" name="password" placeholder="Password"/>
-				</div>
-				<button type='submit' class="btn btn-default" value="{% url 'timer:index' %}">Login</button>
-			</form>
-		{% endif %}
-
-		
-	        <ul class="nav navbar-nav navbar-right">
-		    {% if user.is_authenticated %}
-		        <li><a><span class="navbarColor"> Hello, {{ user.username }}.</span></a></li>
-			<li><a href="{% url 'users:logout' %}"><span class="navbarColor"> Log Out.</span></a></li>
-		    {% endif %}
-		</ul>
-	    </div><!--/.nav-collapse -->
-	    
-	    </div>
-	</nav>
-	
-	<div class="container">
-	
-	    <div class="page-header">
-	        {% block header %}{% endblock header %}
-	    </div>
-	    <div>
-	        {% block content %}{% endblock content %}
-	    </div>
-	</div><!--/container-->
+		<div class="container">
+			<div>
+				{% block content %}{% endblock content %}
+			</div>
+		</div>
 
 
 	
     </body>
 </html>
 	    
+<!-- 
+
+						<li class="dropdown">
+									<a data-toggle="dropdown" href="{% url 'timer:activities' %}"><span class="textColor"><span class="glyphicon glyphicon-tasks"></span> Activities<span class="caret"></span></span></a>
+									<ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="menu">
+										{% for activity in topActivities %}
+											<li role="presentation"><a role="menuitem" tabindex="-1" href="{% url 'timer:activity_detail' activity.id %}">{{activity.activity_title}}</a></li>
+										{% endfor %}
+									</ul>
+								</li>
+						
+
+
+
+
+
+
+								<form class="navbar-form navbar-right" method="POST" action="{% url 'users:register' %}">{% csrf_token %}
+								<button type="submit" class="btn btn-success">Register<span class="glyphicon glyphicon-user"></span></button>
+							</form>
+							<form id="loginForm" class="navbar-form navbar-right" method="POST" action="{% url 'users:login' %}">{% csrf_token %}
+								<div class="form-group">
+									<input type="text" class="form-control" id="username" placeholder="username" name="username">
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control" id="pwd" placeholder="password" name="pwd">
+								</div>
+								<button type="submit" class="btn btn-success" value="{% url 'timer:index' %}">login<span class="glyphicon glyphicon-log-in"></span></button>
+							</form>
+
+-->

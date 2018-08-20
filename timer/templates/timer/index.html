@@ -1,41 +1,92 @@
-{% extends "timer/base.html" %}
+{% extends "timer/activities.html" %}
+
 {% load static %}
-
-{% block header %}
-
-    
-
-    <link rel="stylesheet" href="{% static 'index_style.css' %}"></link>
-
-    <div class='jumbotron'>
-        <h1>Track Your Dreams</h1>
-    </div>
-{% endblock header %}
 
 
 {% block content %}
 
-    {% if user.is_authenticated %}
-        <h2>
-                Welcome, {{ user.username }}!  
-                
-                They say it takes 10,000 hours to become a professional at something.  
-                Lets see what you can do! :)
-        </h2>
-    {% else %}
-        <h2>
-            <a href="{% url 'users:register' %}">Register</a> a <a href="{% url 'timer:index' %}">Time Tracker</a> acoount to to track your activities.
-            <br>
-            <br>
-            I promise you wont regret it :)
-        </h2>
 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	<meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+
+
+        #middle{
+            height: 1000px;
+            background-color:rgba(0, 0, 0, 0.575)
+        }
+
+        .jumbotron{
+            
+            background-color: rgba(153, 153, 153, 0.466);
+            text-align: center; 
+            color: lime;   
+            
+        }
+        
+        .row{
+            border-radius: 110px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows:auto;
+            grid-gap: 10px;
+            background-color: transparent;
+            padding: 10px;
+        }
+        .grid-container>div {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding:20px 0;
+        }
+        body{
+            overflow-y: scroll;
+            
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    {% if user.is_authenticated %}
+        <div class="row">
+
+            <div id="middle" class="col-sm-12">
+                <div class="row">
+
+                        <div class="jumbotron">
+                            <h1> Welcome {{ user.username }} </h1>
+                            <p>TimeTracker is designed to make it fun & easy to track your activities.</p>
+                        </div>
+                        <div class="grid-container">
+                            {% for activity in activities %}
+                                <div class="item{{ forloop.counter }}">{{activity.activity_title}}</div>
+                            {% endfor %}
+                        </div>
+                    
+                </div>
+
+            </div>
+        </div>
     {% endif %}
 
+</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+</body>
+</html>
 {% endblock content %}
 
 
-{% comment %}
-<img src="https://cdn.appstorm.net/mac.appstorm.net/mac/files/2013/11/Tymes-Logo.png">
-{% endcomment %}

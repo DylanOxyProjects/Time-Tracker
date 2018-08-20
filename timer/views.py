@@ -9,8 +9,22 @@ from timer.models import Activity
 from timer.forms import ActivityForm
 
 
+def add_variable_to_context(request):
+    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]
+    topActivities = activities[:3]        
+    return {'activities': topActivities}
+
 
 def index(request):
+    if request.user.is_authenticated:
+        
+        activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]      
+
+        context = {'activities':activities}
+        
+        return render(request, 'timer/index.html', context) 
+        
+    
     return render(request, 'timer/index.html') 
 
 @login_required   

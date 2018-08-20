@@ -1,5 +1,5 @@
 body{
-  background-color: Snow ;
+  background-color: rgba(0, 0, 0, 0.808) ;
   font-family: monaco, monospace;
 }
 
@@ -8,13 +8,10 @@ body{
 
 .list-group-item{
   border-color: transparent;
-  background-color:  rgb(226, 242, 255)  ;
+  background-color:  rgba(0, 0, 0, 0.479)  ;
 }
 
-.textColor{
-  color: SlateGrey  ;
-  font-weight: bold;
-}
+
 
 #scrollBar{
   background-color:  rgb(226, 242, 255)  ;

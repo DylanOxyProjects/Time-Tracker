@@ -1,14 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login as auth_login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 def logout_view(request):
     """Log the user out"""
     logout(request)
-    return HttpResponseRedirect(reverse('timer:index'))
+    #return HttpResponseRedirect(reverse('timer:index'))
+    return redirect('timer:index')
+
+
+def login(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        auth_login(request, user)  
+        return redirect('timer:index')
+    else:
+        messages.error(request,'username or password not correct')
+        return redirect('timer:index')
 
 def register(request):
     """Register a new user"""

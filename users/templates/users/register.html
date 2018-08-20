@@ -1,15 +1,33 @@
 {% extends 'timer/base.html' %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<style>
+
+		body{
+			background-color: rgb(116, 116, 116);
+			color: black;
+		}
+
+		#btn{
+		}
+
+	</style>
+</head>
 
 	<form method="post" action="{% url 'users:register' %}">
 		{% csrf_token %}
 		{{ form.as_p }}
 		
-		<button name="submit">register</button>
+		<button class="btn" name="submit">register</button>
 		<input type="hidden" name="next" value="{% url 'timer:index' %}" />
 	</form>
 	
 	
-
 {% endblock content%}
