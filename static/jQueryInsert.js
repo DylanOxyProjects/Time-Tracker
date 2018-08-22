@@ -5,7 +5,7 @@ $(document).ready(function(){
     $("#firstActivityItem").hide(); 
 
 
-    function saveTime(){
+    function saveTime(){    
         var activityID = $("#activityID").text();
 
         var currentTime = $("#total-time").text();
@@ -34,7 +34,7 @@ $(document).ready(function(){
 
     $("#delBTN").click(function(){
         var activityID = $("#activityID").text();
-        jQuery('#firstActivityItem')[0].click();
+        jQuery('#activitiesNav')[0].click();
 
         $.ajax({
             url:'/timer/activities/deleteActivity/',

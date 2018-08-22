@@ -1,4 +1,4 @@
-{% extends "timer/activities.html" %}
+{% extends "timer/base.html" %}
 
 {% load static %}
 
@@ -13,41 +13,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
 
-
-        #middle{
-            height: 1000px;
-            background-color:rgba(0, 0, 0, 0.575)
-        }
-
-        .jumbotron{
-            
-            background-color: rgba(153, 153, 153, 0.466);
-            text-align: center; 
-            color: lime;   
-            
-        }
-        
-        .row{
-            border-radius: 110px;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: auto auto auto;
-            grid-template-rows:auto;
-            grid-gap: 10px;
-            background-color: transparent;
-            padding: 10px;
-        }
-        .grid-container>div {
-            background-color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            padding:20px 0;
-        }
         body{
             overflow-y: scroll;
-            
         }
+        p{
+            text-align: center;
+            font-weight: bold;
 
+        }
 
 
     </style>
@@ -56,25 +29,108 @@
 <body>
 <div class="container">
     {% if user.is_authenticated %}
-        <div class="row">
-
-            <div id="middle" class="col-sm-12">
+        {% for activity in activities %}
+            {% if forloop.counter|divisibleby:3 %}
                 <div class="row">
-
-                        <div class="jumbotron">
-                            <h1> Welcome {{ user.username }} </h1>
-                            <p>TimeTracker is designed to make it fun & easy to track your activities.</p>
+            {% endif %}
+                    <div class="col-md-4">
+                        <a href="{% url 'timer:activity_detail' activity.id %}">
+                        <div class="thumbnail">
+                            {% if not activity.activity_image.url %}
+                                <img src="{{ activity.activity_image.url }}" alt="Lights" style="width:100%">
+                            {% else %}
+                                <img src="https://www.w3schools.com/w3images/fjords.jpg" alt="Lights" style="width:100%">
+                            {% endif %}
+                            <div class="caption">
+                                <p>{{activity.activity_title}}</p>
+                            </div>
                         </div>
-                        <div class="grid-container">
-                            {% for activity in activities %}
-                                <div class="item{{ forloop.counter }}">{{activity.activity_title}}</div>
-                            {% endfor %}
-                        </div>
-                    
+                        </a>
+                    </div>
+            {% if forloop.counter|divisibleby:3 %}
                 </div>
-
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/tennis.jpg" alt="Tennis" style="width:100%">
+                        <div class="caption">
+                            <p>Tennis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/guitar.jpg" alt="Guitar" style="width:100%">
+                        <div class="caption">
+                            <p>Guitar</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/history.jpg" alt="History" style="width:100%">
+                        <div class="caption">
+                            <p>History</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/soccer.jpg" alt="Soccer" style="width:100%">
+                        <div class="caption">
+                            <p>Soccer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/running.jpg" alt="Running" style="width:100%">
+                        <div class="caption">
+                            <p>Running</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/coding.jpg" alt="Coding" style="width:100%">
+                        <div class="caption">
+                            <p>Web Development</p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/fortnite2.jpg" alt="gaming" style="width:100%">
+                        <div class="caption">
+                            <p>Gaming</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/math.jpg" alt="math" style="width:100%">
+                        <div class="caption">
+                            <p>Math</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="thumbnail">
+                        <img src="/media/documents/history.jpg" alt="history" style="width:100%">
+                        <div class="caption">
+                            <p>History Studying</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
     {% endif %}
 
 </div>
@@ -90,3 +146,33 @@
 {% endblock content %}
 
 
+<!-- 
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            padding: 10px;
+            grid-gap: 50px 50px;
+        }
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+<div class="grid-container">
+                            <di<div class="grid-container">
+                                <div class="grid-item">1</div>
+                                <div class="grid-item">2</div>
+                                <div class="grid-item">3</div>
+                                <div class="grid-item">4</div>
+                                <div class="grid-item">5</div>
+                                <div class="grid-item">6</div>
+                                <div class="grid-item">7</div>
+                                <div class="grid-item">8</div>
+                                <div class="grid-item">9</div>
+                              </div>
+                        </div>
+-->

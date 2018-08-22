@@ -38,8 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_popup_view_field',
-    
+   
     #my apps
     'users',
     'timer.apps.TimerConfig',
@@ -48,6 +47,8 @@ INSTALLED_APPS = [
     'bootstrap3',
     
 ]
+
+
 
 MIDDLEWARE = [
     # 'django.middleware.security.SecurityMiddleware',

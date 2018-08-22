@@ -1,25 +1,32 @@
 body{
-  background-color: rgba(0, 0, 0, 0.808) ;
   font-family: monaco, monospace;
+}
+
+.textItemColor{
+  color: lawngreen ;
 }
 
 
 
-
 .list-group-item{
-  border-color: transparent;
-  background-color:  rgba(0, 0, 0, 0.479)  ;
+
+  border-style: none;
+  background-color: teal;  
+
 }
 
 
 
 #scrollBar{
   background-color:  rgb(226, 242, 255)  ;
+
   height: 500px;
 }
 
 #mainDiv{
   background-color: rgb(226, 242, 255)  ;
+  color: aquamarine ;
+
   height:500px;
 
 }
@@ -28,17 +35,17 @@ body{
 
 #title{
   color: aquamarine ;
-  background-color: teal  ;
+  background-color: rgba(0, 0, 0, 0.664) ;
   text-align: center;
   border-style: solid;
-  border-color: aquamarine;
+  border-color: lime;
   border-width: 5px;
 }
 
 
 #activity-stats{
   color: teal;
-  background-color: rgb(226, 242, 255)  ;
+  background-color: rgba(0, 0, 0, 0.664) ;
   margin-left: 10px;
   text-align: left;
 }
@@ -112,10 +119,10 @@ body{
 #insertDiv{
   text-align: center;
   color: lime;
-  background-color: teal  ;
+  background-color:rgba(0, 0, 0, 0.664) ;
   margin-top: 10px;
   border-style: solid;
-  border-color: aquamarine;
+  border-color: lime;
   border-width: 5px 5px 5px 5px;
   width: 50%;
   
@@ -174,10 +181,10 @@ body{
 
 #levelDiv{
   color: lime;
-  background-color: teal  ;
+  background-color:rgba(0, 0, 0, 0.664);
   margin-top: 10px;
   border-style: solid;
-  border-color: aquamarine;
+  border-color: lime;
   border-width: 5px 0px 5px 5px;
   width: 50%;
 }

@@ -19,13 +19,22 @@ var currentTimeKeeper = new Stopwatch(currentTime, "0");
 
 startBTN.addEventListener("click", function(){
     if (!totalTimeKeeper.isOn){
-        startBTN.textContent = "STOP";
+        startBTN.innerHTML = '<span class="glyphicon glyphicon-pause"></span>';
+        startBTN.style.backgroundColor = "DarkRed";
+        startBTN.style.borderColor = "crimson";
+        startBTN.style.color = "RGB(243, 23, 45)";
+
         totalTimeKeeper.start();
         currentTimeKeeper.start();
 
     }
     else if(totalTimeKeeper.isOn){
-        startBTN.textContent = "START";
+        startBTN.innerHTML = '<span class="glyphicon glyphicon-play"></span>';
+        startBTN.style.backgroundColor = "rgb(4, 95, 65)";
+        startBTN.style.borderColor = "lime";
+        startBTN.style.color = "lime";
+
+
 
         totalTimeKeeper.stop();
         currentTimeKeeper.stop();

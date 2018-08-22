@@ -9,22 +9,16 @@ from timer.models import Activity
 from timer.forms import ActivityForm
 
 
-def add_variable_to_context(request):
-    activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]
-    topActivities = activities[:3]        
-    return {'activities': topActivities}
+
 
 
 def index(request):
     if request.user.is_authenticated:
         
-        activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]      
-
+        activities = Activity.objects.filter(owner=request.user).order_by('-activity_time')[:]     
+   
         context = {'activities':activities}
-        
         return render(request, 'timer/index.html', context) 
-        
-    
     return render(request, 'timer/index.html') 
 
 @login_required   
@@ -169,7 +163,7 @@ def new_activity(request):
         form = ActivityForm()   
     else:
         #POST data submitted; process data
-        form = ActivityForm(request.POST)  
+        form = ActivityForm(request.POST, request.FILES)  
         if form.is_valid():   
             new_activity = form.save(commit=False)
             new_activity.owner = request.user

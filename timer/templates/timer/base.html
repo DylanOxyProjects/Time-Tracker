@@ -40,8 +40,10 @@
 
 		body{
 			font-family: monaco, monospace;
-
+			background-color: black;
 		}	
+
+
 
 
 	</style>
@@ -62,17 +64,17 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					{% if user.is_authenticated %}
 						<ul class="nav navbar-nav">
-							<li><a href="{% url 'timer:activities' %}"><span class="textColor"><span class="glyphicon glyphicon-tasks"></span> Activities</span></a></li>
+							<li><a id="activitiesNav" href="{% url 'timer:activities' %}"><span class="textColor"><span class="glyphicon glyphicon-tasks"></span> Activities</span></a></li>
 							<li><a href="{% url 'timer:new_activity' %}"><span class="textColor"><span class="glyphicon glyphicon-plus"></span> Create Activity</span></a></li>
-							<li><a href="#"><span class="textColor"><span class="glyphicon glyphicon-question-sign"></span> About</span></a></li>
 
 						</ul>	
 						<ul class="nav navbar-nav navbar-right">
+							<li><a><span class="textColor"><span class="glyphicon glyphicon-user"></span> {{ user.username }} </span></a></li>
 							<li><a href="{% url 'users:logout' %}"><span class="textColor"><span class="glyphicon glyphicon-log-out"></span> Logout</span></a></li>
+							
 						</ul>
 					{% else %}
 						<ul class="nav navbar-nav">
-							<li><a href="#"><span class="textColor"><span class="glyphicon glyphicon-question-sign"></span> About</span></a></li>
 
 							<li><a href="{% url 'users:register' %}"><span class="textColor"><span class="glyphicon glyphicon-user"></span> Sign Up</span></a></li>
 
@@ -93,6 +95,7 @@
 			</div>
 		</nav>
 
+
 		{% for message in messages %}
 			<div class="alert alert-success">
 				<a class="close" href="#" data-dismiss="alert">×</a>
@@ -108,7 +111,7 @@
 		</div>
 
 
-	
+
     </body>
 </html>
 	    

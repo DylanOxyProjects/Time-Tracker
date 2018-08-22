@@ -32,6 +32,7 @@
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	{{ form.media }}
 </head>
 
 <body>
@@ -45,7 +46,7 @@
 	{% endif %}	
 
    
-    <form action="{% url 'timer:new_activity' %}" method='POST' class="form">
+    <form action="{% url 'timer:new_activity' %}" method='POST' class="form" enctype="multipart/form-data">
     
 	{% csrf_token %}
 	{% bootstrap_form form %}

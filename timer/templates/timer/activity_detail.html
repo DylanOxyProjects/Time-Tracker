@@ -1,4 +1,4 @@
-{% extends "timer/activities.html" %}
+{% extends "timer/base.html" %}
 
 {% load static %}
 
@@ -33,9 +33,9 @@
             {% for activityTitle in activities %}
                 <p hidden id="activityID">{{ activity.id }}</p>
                 {% if activityTitle.activity_title == activity.activity_title %}
-                    <a id="{{ activityTitle.id }}" class="list-group-item active" href="{% url 'timer:activity_detail' activityTitle.id %}">{{ forloop.counter }}. <span id="{{ activityTitle.id }}">{{ activityTitle.activity_title }}</span></a> 
+                    <a id="{{ activityTitle.id }}" class="list-group-item active" href="{% url 'timer:activity_detail' activityTitle.id %}"><span id="test" class="textItemColor">{{ activityTitle.activity_title }}</span></a> 
                 {% else %}
-                    <a id="{{ activityTitle.id }}" class="list-group-item" href="{% url 'timer:activity_detail' activityTitle.id %}"><span class="textColor">{{ forloop.counter }}. </span><span id="{{ activityTitle.id }}" class="textColor">{{ activityTitle.activity_title }}</span></a>
+                    <a id="{{ activityTitle.id }}" class="list-group-item" href="{% url 'timer:activity_detail' activityTitle.id %}"><span id="{{ activityTitle.id }}" class="textItemColor">{{ activityTitle.activity_title }}</span></a>
                 {% endif %}
             {% endfor %}
         </div>
@@ -51,8 +51,8 @@
                 <h2>Total Time:  <span id="total-time">{{ activity.activity_time }}</span></h2>
                 <h2>Current Time:  <span id="currentTime">0000:00:00.000</span></h2>
                 <div id="btns">
-                    <button type="button" class="btn-success" id="startBTN">START </button>
-                    <button hidden type="button" class="btn-success" id="stopBTN">STOP </button>
+                    <button type="button" class="btn" id="startBTN"><span class="glyphicon glyphicon-play"> </span></button>
+                    <button hidden type="button" class="btn-success" id="stopBTN"><span class="glyphicon glyphicon-pause"> </span></button>
                 </div>
               </div>     
         </div>
