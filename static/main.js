@@ -6,6 +6,17 @@ var stopBTN = document.getElementById("stopBTN");
 var editBTN = document.getElementById("editBTN");
 var insertBTN = document.getElementById("insertBTN");
 
+var title = document.getElementById("title");
+var levelDiv = document.getElementById("levelDiv");
+var insertDiv = document.getElementById("insertDiv");
+
+var activity_title = document.getElementById("activity-title");
+var total_time = document.getElementById("total-time");
+var currentTime = document.getElementById("currentTime");
+var textItemColor = document.getElementsByClassName("textItemColor");
+
+
+
 // create boolean var to prevent multiple edit presses from altering title text
 var showTitleInput = true;
 //hide delete BTN on page refresh
@@ -24,6 +35,7 @@ startBTN.addEventListener("click", function(){
         startBTN.style.borderColor = "crimson";
         startBTN.style.color = "RGB(243, 23, 45)";
 
+
         totalTimeKeeper.start();
         currentTimeKeeper.start();
 
@@ -33,6 +45,7 @@ startBTN.addEventListener("click", function(){
         startBTN.style.backgroundColor = "rgb(4, 95, 65)";
         startBTN.style.borderColor = "lime";
         startBTN.style.color = "lime";
+
 
 
 
@@ -73,7 +86,7 @@ editBTN.addEventListener("click", function(){
     var activityList = document.getElementById(activityIDString);
 
     saveHandler = function(){
-
+        activityTitle.style.color = "aquamarine";
         //get new title string from user
         var activityTitleInput = document.getElementsByName("activity-title")[0];
 
@@ -92,6 +105,7 @@ editBTN.addEventListener("click", function(){
     }
 
     if (showTitleInput){
+        activityTitle.style.color = "black";
         activityTitle.innerHTML = '<input type="text" name="activity-title" placeholder="activityTitle" value="'+ activityTitle.innerHTML +'"/>'
         + '<button type="button" class="btn-primary" onclick="saveHandler()">SAVE</button>';
         showTitleInput = false;

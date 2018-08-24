@@ -1,6 +1,10 @@
 body{
     font-family: monaco, monospace;
-    color: teal;
+    background-color: black;
+}
+
+th{
+    background-color: grey;
 }
 
 

@@ -15,13 +15,13 @@
 
         body{
             overflow-y: scroll;
+            background-color: black;
+
         }
         p{
             text-align: center;
             font-weight: bold;
-
         }
-
 
     </style>
 
@@ -36,7 +36,7 @@
                     <div class="col-md-4">
                         <a href="{% url 'timer:activity_detail' activity.id %}">
                         <div class="thumbnail">
-                            {% if not activity.activity_image.url %}
+                            {% if activity.activity_image %}
                                 <img src="{{ activity.activity_image.url }}" alt="Lights" style="width:100%">
                             {% else %}
                                 <img src="https://www.w3schools.com/w3images/fjords.jpg" alt="Lights" style="width:100%">

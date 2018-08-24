@@ -1,55 +1,63 @@
 body{
   font-family: monaco, monospace;
+  background-color: black;
 }
 
 .textItemColor{
   color: lawngreen ;
 }
 
-
-
 .list-group-item{
-
   border-style: none;
-  background-color: teal;  
-
+  background-color: rgba(255, 255, 255, 0.171) ;  
 }
 
-
-
 #scrollBar{
-  background-color:  rgb(226, 242, 255)  ;
-
+  background-color:  rgba(255, 255, 255, 0.171) ;
   height: 500px;
+  
 }
 
 #mainDiv{
-  background-color: rgb(226, 242, 255)  ;
+  background-color: rgba(255, 255, 255, 0.171) ;
   color: aquamarine ;
-
+  border-style: none;
+  border-color: lime;
   height:500px;
+  border-width: 5px;
 
 }
 
-
-
 #title{
   color: aquamarine ;
-  background-color: rgba(0, 0, 0, 0.664) ;
+  background-color: rgba(255, 255, 255, 0.171) ;
   text-align: center;
-  border-style: solid;
+  border-style: groove;
   border-color: lime;
   border-width: 5px;
 }
 
-
-#activity-stats{
-  color: teal;
-  background-color: rgba(0, 0, 0, 0.664) ;
-  margin-left: 10px;
-  text-align: left;
+#levelDiv{
+  color: lime;
+  background-color:rgba(255, 255, 255, 0.171) ;
+  margin-top: 10px;
+  border-style:groove;
+  border-color: lime;
+  border-width: 5px 0px 5px 5px;
+  width: 50%;
 }
 
+#insertDiv{
+  text-align: center;
+  color: lime;
+  background-color:rgba(255, 255, 255, 0.171) ;
+  margin-top: 10px;
+  border-style: groove;
+  border-color: lime;
+  border-width: 5px 5px 5px 5px;
+  width: 50%;
+  
+}
 
 #startBTN{
   margin-top: 15px;
@@ -113,20 +121,9 @@ body{
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
-  
 }
 
-#insertDiv{
-  text-align: center;
-  color: lime;
-  background-color:rgba(0, 0, 0, 0.664) ;
-  margin-top: 10px;
-  border-style: solid;
-  border-color: lime;
-  border-width: 5px 5px 5px 5px;
-  width: 50%;
-  
-}
+
 
 
 
@@ -179,15 +176,7 @@ body{
 }
 
 
-#levelDiv{
-  color: lime;
-  background-color:rgba(0, 0, 0, 0.664);
-  margin-top: 10px;
-  border-style: solid;
-  border-color: lime;
-  border-width: 5px 0px 5px 5px;
-  width: 50%;
-}
+
 
 .control-label{
   color: aquamarine;

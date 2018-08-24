@@ -26,7 +26,9 @@
 			<tr class="info">
 			  <th>Activity #</th>
 			  <th>Activity Title</th>
-			  <th>Activity Time</th>
+				<th>Activity Time</th>
+				<th>Activity Level</th>
+
 			</tr>
 		  </thead>
 		  {% for activity in activities %}
@@ -35,6 +37,8 @@
 				<td>{{ forloop.counter }}</td>
 				<td><a href="{% url 'timer:activity_detail' activity.id %}">{{ activity.activity_title }}</a></td>
 				<td>{{ activity.activity_time }}</td>
+				<td>{{ activity.activity_level }}</td>
+
 				</tr>
 			</tbody>
 			{% endfor %}
