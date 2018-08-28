@@ -39,7 +39,7 @@ def register(request):
             
             authenticated_user = authenticate(username=new_user.username,
                                               password=request.POST['password1'])
-            login(request, authenticated_user)
+            auth_login(request, authenticated_user)
             return HttpResponseRedirect(reverse('timer:index'))
         
     context = {'form': form}
